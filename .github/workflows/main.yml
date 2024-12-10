@@ -11,6 +11,6 @@ jobs:
       - name: Setup .NET SDK 
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '9.x'
+          dotnet-version: '8.x'
       - run: cd Italbytz.Adapters.Algorithms.AI/Italbytz.Adapters.Algorithms.AI.Tests && dotnet test
 
