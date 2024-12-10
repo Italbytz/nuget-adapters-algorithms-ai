@@ -1,7 +1,6 @@
 # Introduction
 
-This
-package ([Source Code](https://github.com/Italbytz/nuget-adapters-algorithms-ai))
+This package ([Source Code](https://github.com/Italbytz/nuget-adapters-algorithms-ai))
 provides implementations for the algorithms discussed
 in [Artificial Intelligence: A Modern Approach](http://aima.cs.berkeley.edu).
 Most of the code is based on code from the
