@@ -3,9 +3,9 @@
     {
       "src": [
         {
-          "src": "../Italbytz.Adapters.Algorithms",
+          "src": "../Italbytz.Adapters.Algorithms.AI",
           "files": [
-            "Italbytz.Adapters.Algorithms/*.csproj"
+            "Italbytz.Adapters.Algorithms.AI/*.csproj"
           ]
         }
       ],
@@ -36,8 +36,8 @@
       "modern"
     ],
     "globalMetadata": {
-      "_appName": "Italbytz.Adapters.Algorithms",
-      "_appTitle": "Italbytz.Adapters.Algorithms",
+      "_appName": "Italbytz.Adapters.Algorithms.AI",
+      "_appTitle": "Italbytz.Adapters.Algorithms.AI",
       "_enableSearch": true,
       "pdf": false
     }
