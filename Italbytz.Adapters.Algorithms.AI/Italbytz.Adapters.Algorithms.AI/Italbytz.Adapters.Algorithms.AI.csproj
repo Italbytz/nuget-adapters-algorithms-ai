@@ -11,7 +11,7 @@
         <PackageReadmeFile>introduction.md</PackageReadmeFile>
         <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <RepositoryUrl>https://github.com/Italbytz/nuget-adapters-algorithms-ai</RepositoryUrl>
-        <LangVersion>11</LangVersion>
+        <LangVersion>12</LangVersion>
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Search\"/>

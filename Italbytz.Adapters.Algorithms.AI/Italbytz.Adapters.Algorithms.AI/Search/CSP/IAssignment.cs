@@ -8,7 +8,7 @@ public interface IAssignment<TVar,TVal> : ICloneable
     
 {
     public IEnumerable<TVar> Variables { get; }
-    public TVal GetValue(TVar variable);
+    public TVal? GetValue(TVar variable);
 
     public void Add(TVar variable, TVal value);
 

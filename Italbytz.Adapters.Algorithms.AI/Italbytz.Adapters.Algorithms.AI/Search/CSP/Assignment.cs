@@ -14,13 +14,9 @@ public class Assignment<TVar,TVal> : IAssignment<TVar,TVal> where TVar : IVariab
     
     public IEnumerable<TVar> Variables => new List<TVar>(variableToValueMap.Keys);
     
-    public TVal GetValue(TVar variable)
+    public TVal? GetValue(TVar variable)
     {
-        if (!variableToValueMap.TryGetValue(variable, out var value))
-        {
-            throw new NoNullAllowedException("No value assigned to variable " + variable);
-        }
-        return value;
+        return !variableToValueMap.TryGetValue(variable, out var value) ? default(TVal) : value;
     }
     
     public void Add(TVar variable, TVal value)
