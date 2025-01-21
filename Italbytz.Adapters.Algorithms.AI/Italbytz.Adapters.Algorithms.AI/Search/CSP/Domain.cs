@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,41 +6,45 @@ namespace Italbytz.Adapters.Algorithms.AI.Search.CSP;
 
 public class Domain<TVal> : IDomain<TVal>
 {
-    public TVal[] Values { get; }
-    
     public Domain(IEnumerable<TVal> values)
     {
-        this.Values = values.ToArray();
+        Values = values.ToArray();
     }
 
     public Domain(params TVal[] values)
     {
-        this.Values = values;
-    } 
-    
-    
-    
+        Values = values;
+    }
+
+    public TVal[] Values { get; }
+
+
     public TVal this[int index] => Values[index];
-    
-    public bool Contains(TVal value) => Values.Contains(value);
-    
-    public bool IsEmpty => Values.Length == 0;
-    
-    public TVal Get(int index) => Values[index];
-    
+
     public IEnumerator<TVal> GetEnumerator()
     {
         return ((IEnumerable<TVal>)Values).GetEnumerator();
     }
-    
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
     }
-    
+
     public bool Equals(IDomain<TVal>? other)
     {
-        return other != null && Values.Equals(other.Values);
+        return other != null && Values.SequenceEqual(other.Values);
+    }
+
+    public bool Contains(TVal value)
+    {
+        return Values.Contains(value);
+    }
+
+
+    public TVal Get(int index)
+    {
+        return Values[index];
     }
 
     public override bool Equals(object? obj)
@@ -61,6 +64,4 @@ public class Domain<TVal> : IDomain<TVal>
     {
         return Values.GetHashCode();
     }
-    
-    
 }
