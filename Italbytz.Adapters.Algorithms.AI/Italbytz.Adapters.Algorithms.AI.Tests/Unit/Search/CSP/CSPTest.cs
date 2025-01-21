@@ -1,5 +1,6 @@
 using Italbytz.Adapters.Algorithms.AI.Search.CSP;
 using Italbytz.Adapters.Algorithms.AI.Search.CSP.Examples;
+using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
 namespace Italbytz.Adapters.Algorithms.AI.Tests.Unit.Search.CSP;
 
@@ -8,12 +9,18 @@ public class CSPTest
     private static readonly IVariable X = new Variable("x");
     private static readonly IVariable Y = new Variable("y");
     private static readonly IVariable Z = new Variable("z");
-    
-    private static readonly IConstraint<IVariable, string> C1 = new NotEqualConstraint<IVariable,string>(X, Y);
-    private static readonly IConstraint<IVariable, string> C2 = new NotEqualConstraint<IVariable,string>(X, Y);
- 
-    private IDomain<string> _colors;
+
+    private static readonly IConstraint<IVariable, string> C1 =
+        new NotEqualConstraint<IVariable, string>(X, Y);
+
+    private static readonly IConstraint<IVariable, string> C2 =
+        new NotEqualConstraint<IVariable, string>(X, Y);
+
     private IDomain<string> _animals;
+
+    private IDomain<string> _colors;
+
+    private IList<IVariable> _variables;
 
 
     [SetUp]
@@ -30,15 +37,13 @@ public class CSPTest
         _animals = new Domain<string>("cat", "dog");
     }
 
-    private IList<IVariable> _variables;
-    
     [Test]
     public void TestConstraintNetwork()
     {
         var csp = new CSP<IVariable, string>(_variables);
         csp.AddConstraint(C1);
         csp.AddConstraint(C2);
-        
+
         Assert.Multiple(() =>
         {
             Assert.That(csp.Constraints, Is.Not.Null);
@@ -50,10 +55,8 @@ public class CSPTest
             Assert.That(csp.GetConstraints(Z), Is.Not.Null);
             Assert.That(csp.GetConstraints(Z), Is.Empty);
         });
-        
-        
     }
-    
+
     [Test]
     public void TestGetNeighbor()
     {
@@ -66,7 +69,7 @@ public class CSPTest
             Assert.That(csp.GetNeighbor(Y, C1), Is.EqualTo(X));
         });
     }
-    
+
     [Test]
     public void TestRemoveConstraint()
     {
@@ -88,7 +91,7 @@ public class CSPTest
     {
         var colors2 = new Domain<string>(_colors.Values);
         Assert.That(colors2, Is.EqualTo(_colors));
-        
+
         var csp = new CSP<IVariable, string>(_variables);
         csp.AddConstraint(C1);
         Assert.Multiple(() =>
@@ -97,7 +100,7 @@ public class CSPTest
             Assert.That(csp.GetDomain(X), Has.Count.EqualTo(0));
             Assert.That(csp.GetConstraints(X), Is.Not.Null);
         });
-        
+
         csp.SetDomain(X, _colors);
         Assert.Multiple(() =>
         {
@@ -105,7 +108,7 @@ public class CSPTest
             Assert.That(csp.GetDomain(X), Has.Count.EqualTo(3));
             Assert.That(csp.GetDomain(X)[0], Is.EqualTo("red"));
         });
-        
+
         var cspCopy = csp.CopyDomains();
         Assert.That(cspCopy.GetDomain(X), Is.Not.Null);
         var xConst = cspCopy.GetConstraints(X);
@@ -118,7 +121,7 @@ public class CSPTest
             Assert.That(cspCopy.GetConstraints(X), Is.Not.Null);
             Assert.That(cspCopy.GetConstraints(X)[0], Is.EqualTo(C1));
         });
-        
+
         cspCopy.RemoveValueFromDomain(X, "red");
         Assert.Multiple(() =>
         {
@@ -127,7 +130,7 @@ public class CSPTest
             Assert.That(csp.GetDomain(X), Has.Count.EqualTo(3));
             Assert.That(csp.GetDomain(X)[0], Is.EqualTo("red"));
         });
-        
+
         cspCopy.SetDomain(X, _animals);
         Assert.Multiple(() =>
         {
@@ -136,6 +139,5 @@ public class CSPTest
             Assert.That(csp.GetDomain(X), Has.Count.EqualTo(3));
             Assert.That(csp.GetDomain(X)[0], Is.EqualTo("red"));
         });
-
     }
 }

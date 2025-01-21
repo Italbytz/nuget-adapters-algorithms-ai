@@ -2,6 +2,8 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
+using Italbytz.Ports.Algorithms.AI.Search.CSP;
+
 namespace Italbytz.Adapters.Algorithms.AI.Search.CSP;
 
 public class Variable : IVariable

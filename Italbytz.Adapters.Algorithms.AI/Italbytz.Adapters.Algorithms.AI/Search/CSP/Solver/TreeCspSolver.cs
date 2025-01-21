@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Italbytz.Ports.Algorithms.AI.Search.CSP;
+using Italbytz.Ports.Algorithms.AI.Search.CSP.Solver;
 
 namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
 

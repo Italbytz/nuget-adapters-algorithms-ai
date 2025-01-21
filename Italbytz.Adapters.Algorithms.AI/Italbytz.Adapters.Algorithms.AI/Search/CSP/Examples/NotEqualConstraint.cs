@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
 namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Examples;
 
-public class NotEqualConstraint<TVar, TVal> : IConstraint<TVar, TVal> where TVar : IVariable
+public class NotEqualConstraint<TVar, TVal> : IConstraint<TVar, TVal>
+    where TVar : IVariable
 {
-    private TVar _var1;
-    private TVar _var2;
-    
+    private readonly TVar _var1;
+    private readonly TVar _var2;
+
     public NotEqualConstraint(TVar var1, TVar var2)
     {
         _var1 = var1;
@@ -15,6 +17,7 @@ public class NotEqualConstraint<TVar, TVal> : IConstraint<TVar, TVal> where TVar
     }
 
     public IList<TVar> Scope { get; }
+
     public bool IsSatisfiedWith(IAssignment<TVar, TVal> assignment)
     {
         var value1 = assignment.GetValue(_var1);

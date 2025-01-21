@@ -1,6 +1,7 @@
 using Italbytz.Adapters.Algorithms.AI.Search.CSP;
 using Italbytz.Adapters.Algorithms.AI.Search.CSP.Examples;
 using Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
+using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
 namespace Italbytz.Adapters.Algorithms.AI.Tests.Unit.Search.CSP;
 
