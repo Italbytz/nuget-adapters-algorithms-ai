@@ -15,7 +15,7 @@ public class Variable : IVariable
 
     public bool Equals(IVariable? other)
     {
-        return other != null && Name == other.Name;
+        return other != null && Name.Equals(other.Name);
     }
 
     public override bool Equals(object? obj)

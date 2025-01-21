@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
@@ -22,32 +23,46 @@ public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal> wher
             {
                 return current;
             }
-            var variable = SelectVariableToChange(csp, current);
-            var value = SelectValueForVariable(csp, variable, current);
+            var variables = GetConflictedVariables(csp, current);
+            var variable = variables.ElementAt(new Random().Next(variables.Count));
+            var value = GetMinConflictValue(csp, variable, current);
+            //var value = SelectValueForVariable(csp, variable, current);
             current.Add(variable, value);
         }
         return null;
     }
 
-    private TVal SelectValueForVariable(ICSP<TVar, TVal> csp, TVar variable, IAssignment<TVar, TVal> current)
+    private TVal GetMinConflictValue(ICSP<TVar,TVal> csp, TVar variable, IAssignment<TVar,TVal> assignment)
     {
-        var domain = csp.GetDomain(variable);
+        var constraints = csp.GetConstraints(variable);
+        var testAssignment = (IAssignment<TVar,TVal>)assignment.Clone();
         var minConflicts = int.MaxValue;
-        TVal? bestValue = default(TVal);
-        foreach (var value in domain)
+        var resultCandidates = new List<TVal>();
+        foreach (var value in csp.GetDomain(variable))
         {
-            current.Add(variable, value);
-            var conflicts = csp.Constraints.Count(constraint => !constraint.IsSatisfiedWith(current));
+            testAssignment.Add(variable, value);
+            var conflicts = constraints.Count(constraint => !constraint.IsSatisfiedWith(testAssignment));
             if (conflicts < minConflicts)
             {
                 minConflicts = conflicts;
-                bestValue = value;
+                resultCandidates.Clear();
+                resultCandidates.Add(value);
             }
-            current.Remove(variable);
+            else if (conflicts == minConflicts)
+            {
+                resultCandidates.Add(value);
+            }
+            testAssignment.Remove(variable);
         }
-        return bestValue;
+        
+        return resultCandidates.ElementAt(new Random().Next(resultCandidates.Count));
     }
 
+    private ISet<TVar> GetConflictedVariables(ICSP<TVar, TVal> csp, IAssignment<TVar, TVal> current)
+    {
+        return new HashSet<TVar>(csp.Variables.Where(variable => csp.Constraints.Any(constraint => !constraint.IsSatisfiedWith(current))));
+    }
+    
     private TVar SelectVariableToChange(ICSP<TVar,TVal> csp, IAssignment<TVar, TVal> assignment)
     {
         var variables = csp.Variables.Where(variable => !assignment.Contains(variable));
@@ -57,7 +72,7 @@ public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal> wher
 
     private IAssignment<TVar,TVal> GenerateRandomAssignment(ICSP<TVar,TVal> csp)
     {
-        IAssignment<TVar,TVal> assignment = new Assignment<TVar,TVal>();
+        var assignment = new Assignment<TVar,TVal>();
         foreach (var variable in csp.Variables)
         {
             assignment.Add(variable, csp.GetDomain(variable).ElementAt(new Random().Next(csp.GetDomain(variable).Count)));

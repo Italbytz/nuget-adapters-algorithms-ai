@@ -19,12 +19,12 @@ public class CSP<TVar, TVal> : ICSP<TVar, TVal> where TVar : IVariable
         cnet = new Dictionary<IVariable, IList<IConstraint<TVar, TVal>>>();
     }
     
-    public CSP(IList<TVar> variables) : this(variables, new List<IDomain<TVal>>(), new List<IConstraint<TVar, TVal>>())
+    public CSP(IList<TVar> variables) : this()
     {
         variables.ToList().ForEach(var => AddVariable(var));
     }
 
-    protected CSP() : this(new List<TVar>())
+    protected CSP() : this(new List<TVar>(), new List<IDomain<TVal>>(), new List<IConstraint<TVar, TVal>>())
     {
     }
 

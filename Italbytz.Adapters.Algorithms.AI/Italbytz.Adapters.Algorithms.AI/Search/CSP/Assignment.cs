@@ -2,6 +2,7 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -21,7 +22,7 @@ public class Assignment<TVar,TVal> : IAssignment<TVar,TVal> where TVar : IVariab
     
     public void Add(TVar variable, TVal value)
     {
-        variableToValueMap.Add(variable, value);
+        variableToValueMap[variable] = value;
     }
     
     public void Remove(TVar variable)
@@ -52,12 +53,10 @@ public class Assignment<TVar,TVal> : IAssignment<TVar,TVal> where TVar : IVariab
     
     public object Clone()
     {
-        var clonedAssignment = new Assignment<TVar,TVal>();
-        foreach (var variable in variableToValueMap.Keys)
-        {
-            clonedAssignment.Add(variable, variableToValueMap[variable]);
-        }
-        return clonedAssignment;
+        IAssignment<TVar, TVal> result;
+        result = (IAssignment<TVar, TVal>) MemberwiseClone();
+        ((Assignment<TVar, TVal>) result).variableToValueMap = new Dictionary<TVar, TVal>(variableToValueMap);
+        return result;
     }
     
     public override string ToString()
