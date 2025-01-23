@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using Italbytz.Adapters.Algorithms.AI.Logic.Fol.Kb.Data;
-using Italbytz.Adapters.Algorithms.AI.Logic.Fol.Parsing.Ast;
 using Italbytz.Adapters.Algorithms.AI.Util.MathUtils.Permute;
+using Italbytz.Ports.Algorithms.AI.Logic.Fol.Kb.Data;
+using Italbytz.Ports.Algorithms.AI.Logic.Fol.Parsing.Ast;
+using Italbytz.Ports.Algorithms.AI.Logic.Planning;
 
 namespace Italbytz.Adapters.Algorithms.AI.Logic.Planning;
 

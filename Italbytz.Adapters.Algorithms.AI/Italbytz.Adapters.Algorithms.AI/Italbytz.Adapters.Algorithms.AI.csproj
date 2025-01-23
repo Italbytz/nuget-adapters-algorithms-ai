@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <Nullable>enable</Nullable>
-        <PackageVersion>9.0.1</PackageVersion>
+        <PackageVersion>9.0.2</PackageVersion>
         <Authors>Robin Nunkesser</Authors>
         <PackageProjectUrl>https://github.com/Italbytz/nuget-adapters-algorithms-ai</PackageProjectUrl>
         <Description>Some algorithm adapters to use with Ports and Adapters.</Description>
@@ -29,7 +29,7 @@
         <Folder Include="Util\MathUtils\"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Italbytz.Ports.Algorithms.AI" Version="9.0.2"/>
+        <PackageReference Include="Italbytz.Ports.Algorithms.AI" Version="9.0.3"/>
         <PackageReference Include="LpSolveDotNet.Native.linux-x64" Version="4.0.0"/>
         <PackageReference Include="LpSolveDotNet.Native.linux-x86" Version="4.0.0"/>
         <PackageReference Include="LpSolveDotNet.Native.osx-x86" Version="4.0.0"/>

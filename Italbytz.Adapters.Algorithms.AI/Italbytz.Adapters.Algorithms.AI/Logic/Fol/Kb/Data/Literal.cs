@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text;
-using Italbytz.Adapters.Algorithms.AI.Logic.Fol.Parsing.Ast;
+using Italbytz.Ports.Algorithms.AI.Logic.Fol.Kb.Data;
+using Italbytz.Ports.Algorithms.AI.Logic.Fol.Parsing.Ast;
 
 namespace Italbytz.Adapters.Algorithms.AI.Logic.Fol.Kb.Data;
 

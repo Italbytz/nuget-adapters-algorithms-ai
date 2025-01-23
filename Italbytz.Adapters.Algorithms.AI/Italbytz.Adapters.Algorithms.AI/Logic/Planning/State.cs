@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Logic.Fol.Kb.Data;
+using Italbytz.Ports.Algorithms.AI.Logic.Fol.Kb.Data;
+using Italbytz.Ports.Algorithms.AI.Logic.Planning;
 
 namespace Italbytz.Adapters.Algorithms.AI.Logic.Planning;
 
@@ -26,6 +27,13 @@ public class State : IState
             (current, action) => current.Result(action));
     }
 
+    public bool IsApplicable(IActionSchema action)
+    {
+        return action.Precondition.All(literal => literal.PositiveLiteral
+            ? Fluents.Contains(literal)
+            : !Fluents.Contains(literal.GetComplementaryLiteral()));
+    }
+
     private State Result(IActionSchema action)
     {
         if (IsApplicable(action))
@@ -40,12 +48,5 @@ public class State : IState
         }
 
         return this;
-    }
-
-    public bool IsApplicable(IActionSchema action)
-    {
-        return action.Precondition.All(literal => literal.PositiveLiteral
-            ? Fluents.Contains(literal)
-            : !Fluents.Contains(literal.GetComplementaryLiteral()));
     }
 }

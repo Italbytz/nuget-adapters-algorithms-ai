@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Italbytz.Adapters.Algorithms.AI.Logic.Fol.Kb.Data;
 using Italbytz.Adapters.Algorithms.AI.Logic.Fol.Parsing.Ast;
+using Italbytz.Ports.Algorithms.AI.Logic.Fol.Kb.Data;
+using Italbytz.Ports.Algorithms.AI.Logic.Fol.Parsing.Ast;
+using Italbytz.Ports.Algorithms.AI.Logic.Planning;
 
 namespace Italbytz.Adapters.Algorithms.AI.Logic.Planning;
 
@@ -9,7 +12,6 @@ public class ActionSchema : IActionSchema
 {
     private readonly IList<ILiteral> _effectsNegativeLiterals;
     private readonly IList<ILiteral> _effectsPositiveLiterals;
-    private readonly string _name;
 
     public ActionSchema(string name, List<ITerm> variables,
         string precondition,
@@ -23,13 +25,15 @@ public class ActionSchema : IActionSchema
     {
         variables ??= new List<ITerm>();
         Variables = variables;
-        _name = name;
+        Name = name;
         Precondition = precondition;
         Effect = effect;
         _effectsNegativeLiterals = new List<ILiteral>();
         _effectsPositiveLiterals = new List<ILiteral>();
         SortEffects();
     }
+
+    public string Name { get; }
 
     public IList<ILiteral> Effect { get; }
 
@@ -41,8 +45,11 @@ public class ActionSchema : IActionSchema
     {
         if (other is null) return false;
         if (ReferenceEquals(this, other)) return true;
-        // ToDo: Implement Equals
-        return false;
+        var equality = Name == ((IActionSchema)other).Name &&
+                       Variables.SequenceEqual(other.Variables) &&
+                       Precondition.SequenceEqual(other.Precondition) &&
+                       Effect.SequenceEqual(other.Effect);
+        return equality;
     }
 
     private void SortEffects()
@@ -101,7 +108,7 @@ public class ActionSchema : IActionSchema
                 eff.NegativeLiteral));
         }
 
-        return new ActionSchema(_name, new List<ITerm>(constants),
+        return new ActionSchema(Name, new List<ITerm>(constants),
             newPrecondition, newEffect);
     }
 
