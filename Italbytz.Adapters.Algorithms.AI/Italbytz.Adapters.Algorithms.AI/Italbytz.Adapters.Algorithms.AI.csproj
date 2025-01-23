@@ -26,6 +26,7 @@
     <ItemGroup>
         <Folder Include="Search\Agent\"/>
         <Folder Include="Search\Framework\Problem\"/>
+        <Folder Include="Util\MathUtils\"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Italbytz.Ports.Algorithms.AI" Version="9.0.2"/>

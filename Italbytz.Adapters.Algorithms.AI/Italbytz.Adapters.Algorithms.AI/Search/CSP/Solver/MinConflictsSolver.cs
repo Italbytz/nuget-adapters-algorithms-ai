@@ -5,7 +5,6 @@ using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
 namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
 
-// ToDo: This is Copilot generated code, please review it before using it in production. It differs from the AIMA Java implementation.
 public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal>
     where TVar : IVariable
 {
@@ -26,7 +25,6 @@ public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal>
             var variable =
                 variables.ElementAt(new Random().Next(variables.Count));
             var value = GetMinConflictValue(csp, variable, current);
-            //var value = SelectValueForVariable(csp, variable, current);
             current.Add(variable, value);
         }
 
