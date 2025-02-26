@@ -52,10 +52,18 @@ public class DecisionTreeBinaryTrainerTest
 
         var dataEnumerable =
             mlContext.Data.CreateEnumerable<TransformedData>(transformedData,
-                true);
+                false);
 
-        foreach (var row in dataEnumerable)
-            Console.WriteLine($"{row.Age}\t {row.AgeName}");
+        var dataArray = dataEnumerable.ToArray();
+
+        Assert.That(dataArray, Has.Length.EqualTo(4));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataArray[0].AgeName, Is.EqualTo("Child"));
+            Assert.That(dataArray[1].AgeName, Is.EqualTo("Man"));
+            Assert.That(dataArray[2].AgeName, Is.EqualTo("Grandpa"));
+            Assert.That(dataArray[3].AgeName, Is.EqualTo("Man"));
+        });
     }
 
     [Test]
