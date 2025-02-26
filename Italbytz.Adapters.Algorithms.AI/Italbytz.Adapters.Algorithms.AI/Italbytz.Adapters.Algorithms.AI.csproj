@@ -37,6 +37,7 @@
         <PackageReference Include="LpSolveDotNet.Native.win-x86" Version="4.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.ML" Version="4.0.1"/>
     </ItemGroup>
     <ItemGroup>
         <None Include="../../docfx/docs/introduction.md" Pack="true" PackagePath="\"/>

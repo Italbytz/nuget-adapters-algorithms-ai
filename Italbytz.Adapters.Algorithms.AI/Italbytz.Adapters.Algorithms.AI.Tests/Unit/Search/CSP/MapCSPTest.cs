@@ -39,6 +39,8 @@ public class MapCSPTest
     [Test]
     public void TestMCSearch()
     {
-        new MinConflictsSolver<Variable, string>(100).Solve(csp);
+        var assignment =
+            new MinConflictsSolver<Variable, string>(100).Solve(csp);
+        Assert.That(assignment, Is.Not.Null);
     }
 }
