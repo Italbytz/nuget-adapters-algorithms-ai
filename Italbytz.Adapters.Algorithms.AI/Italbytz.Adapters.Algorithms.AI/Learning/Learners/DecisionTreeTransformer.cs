@@ -1,19 +1,12 @@
+using System;
 using Microsoft.ML;
 using Microsoft.ML.Data;
-using Microsoft.ML.Runtime;
 
 namespace Italbytz.Adapters.Algorithms.AI.Learning.Learners;
 
 public class DecisionTreeTransformer : ITransformer
 {
-    private readonly IHost _host;
-
-    public DecisionTreeTransformer(IHostEnvironment env)
-    {
-        _host = env.Register(nameof(DecisionTreeTransformer));
-    }
-
-    public DataViewSchema GetOutputSchema(DataViewSchema inputSchema)
+    /*public DataViewSchema GetOutputSchema(DataViewSchema inputSchema)
     {
         // Define the output schema based on the input schema
         var schemaBuilder = new DataViewSchema.Builder();
@@ -39,5 +32,26 @@ public class DecisionTreeTransformer : ITransformer
     public void Save(ModelSaveContext ctx)
     {
         // Implement saving logic if necessary
+    }*/
+    public void Save(ModelSaveContext ctx)
+    {
+        throw new NotImplementedException();
     }
+
+    public DataViewSchema GetOutputSchema(DataViewSchema inputSchema)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IDataView Transform(IDataView input)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IRowToRowMapper GetRowToRowMapper(DataViewSchema inputSchema)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool IsRowToRowMapper { get; } = false;
 }

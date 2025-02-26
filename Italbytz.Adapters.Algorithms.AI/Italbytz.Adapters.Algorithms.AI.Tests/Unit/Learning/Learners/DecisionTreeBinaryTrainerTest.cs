@@ -20,6 +20,46 @@ public class DecisionTreeBinaryTrainerTest
     }
 
     [Test]
+    public void TestCustomRestaurantMapper()
+    {
+        var mlContext = new MLContext();
+
+        var samples = new List<ModelInput>
+        {
+            new()
+            {
+                Patrons = @"Some",
+                Price = @"$$$",
+                Type = @"French",
+                Wait_estimate = @"0-10"
+            }
+        };
+
+        var data = mlContext.Data.LoadFromEnumerable(samples);
+
+        var pipeline =
+            mlContext.Transforms.CustomMapping(
+                (Action<ModelInput, ModelMapping>)Mapping, null);
+
+        var transformer = pipeline.Fit(data);
+        var transformedData = transformer.Transform(data);
+
+        var dataEnumerable =
+            mlContext.Data.CreateEnumerable<ModelOutput>(transformedData,
+                false);
+
+        var dataArray = dataEnumerable.ToArray();
+        return;
+    }
+
+    private void Mapping(ModelInput input, ModelMapping output)
+    {
+        output.Features = new float[11];
+        output.PredictedLabel = 1;
+        output.Score = new float[2];
+    }
+
+    [Test]
     public void TestCustomMapper()
     {
         var mlContext = new MLContext();
@@ -34,18 +74,19 @@ public class DecisionTreeBinaryTrainerTest
 
         var data = mlContext.Data.LoadFromEnumerable(samples);
 
-        Action<InputData, CustomMappingOutput> mapping =
-            (input, output) =>
+        void Mapping(InputData input, CustomMappingOutput output)
+        {
+            output.AgeName = input.Age switch
             {
-                output.AgeName = input.Age switch
-                {
-                    < 18 => "Child",
-                    < 55 => "Man",
-                    _ => "Grandpa"
-                };
+                < 18 => "Child",
+                < 55 => "Man",
+                _ => "Grandpa"
             };
+        }
 
-        var pipeline = mlContext.Transforms.CustomMapping(mapping, null);
+        var pipeline =
+            mlContext.Transforms.CustomMapping(
+                (Action<InputData, CustomMappingOutput>)Mapping, null);
 
         var transformer = pipeline.Fit(data);
         var transformedData = transformer.Transform(data);
@@ -119,6 +160,53 @@ public class DecisionTreeBinaryTrainerTest
         [LoadColumn(10)]
         [ColumnName(@"will_wait")]
         public float Will_wait { get; set; }
+    }
+
+    #endregion
+
+    /// <summary>
+    ///     model output class for Restaurant.
+    /// </summary>
+
+    #region model output class
+
+    public class ModelOutput
+    {
+        [ColumnName(@"alternate")] public bool Alternate { get; set; }
+        [ColumnName(@"bar")] public bool Bar { get; set; }
+        [ColumnName(@"fri/sat")] public bool Fri_sat { get; set; }
+        [ColumnName(@"hungry")] public bool Hungry { get; set; }
+        [ColumnName(@"patrons")] public string Patrons { get; set; }
+        [ColumnName(@"price")] public string Price { get; set; }
+        [ColumnName(@"raining")] public bool Raining { get; set; }
+        [ColumnName(@"reservation")] public bool Reservation { get; set; }
+        [ColumnName(@"type")] public string Type { get; set; }
+        [ColumnName(@"wait_estimate")] public string Wait_estimate { get; set; }
+        [ColumnName(@"will_wait")] public float Will_wait { get; set; }
+        [ColumnName(@"Features")] public float[] Features { get; set; }
+
+        [ColumnName(@"PredictedLabel")]
+        public float PredictedLabel { get; set; }
+
+        [ColumnName(@"Score")] public float[] Score { get; set; }
+    }
+
+    #endregion
+
+    /// <summary>
+    ///     model mapping class for Restaurant.
+    /// </summary>
+
+    #region model mapping class
+
+    public class ModelMapping
+    {
+        [ColumnName(@"Features")] public float[] Features { get; set; }
+
+        [ColumnName(@"PredictedLabel")]
+        public float PredictedLabel { get; set; }
+
+        [ColumnName(@"Score")] public float[] Score { get; set; }
     }
 
     #endregion
