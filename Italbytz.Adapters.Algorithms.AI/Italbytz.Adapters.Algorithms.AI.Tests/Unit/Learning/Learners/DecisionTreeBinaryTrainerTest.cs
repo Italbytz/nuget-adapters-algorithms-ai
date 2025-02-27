@@ -49,7 +49,8 @@ public class DecisionTreeBinaryTrainerTest
                 false);
 
         var dataArray = dataEnumerable.ToArray();
-        return;
+        Assert.That(dataArray, Has.Length.EqualTo(1));
+        Assert.That(dataArray[0].PredictedLabel, Is.EqualTo(1));
     }
 
     private void Mapping(ModelInput input, ModelMapping output)
