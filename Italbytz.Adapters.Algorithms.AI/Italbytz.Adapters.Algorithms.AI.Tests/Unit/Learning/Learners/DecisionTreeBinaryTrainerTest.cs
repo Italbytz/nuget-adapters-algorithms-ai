@@ -112,8 +112,16 @@ public class DecisionTreeBinaryTrainerTest
     public void
         TestInducedTreeClassifiesDataSetCorrectly()
     {
-        var trainer = new DecisionTreeBinaryTrainer("will_wait");
-        var mlModel = trainer.Fit(_data);
+        var mlContext = new MLContext();
+        var trainer = new DecisionTreeBinaryTrainer<ModelInput>("will_wait");
+        var transformer = trainer.Fit(_data);
+        var transformedData = transformer.Transform(_data);
+
+        var dataEnumerable =
+            mlContext.Data.CreateEnumerable<ModelOutput>(transformedData,
+                false);
+
+        var dataArray = dataEnumerable.ToArray();
     }
 
     /// <summary>
