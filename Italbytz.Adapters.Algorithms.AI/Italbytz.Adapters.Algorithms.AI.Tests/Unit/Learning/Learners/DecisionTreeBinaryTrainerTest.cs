@@ -117,6 +117,20 @@ public class DecisionTreeBinaryTrainerTest
         var transformer = trainer.Fit(_data);
         var transformedData = transformer.Transform(_data);
 
+        var metrics =
+            mlContext.BinaryClassification.Evaluate(transformedData,
+                "will_wait");
+
+        Console.WriteLine($"Accuracy: {metrics.Accuracy}");
+        Console.WriteLine($"AUC: {metrics.AreaUnderRocCurve}");
+        Console.WriteLine($"F1 Score: {metrics.F1Score}");
+        Console.WriteLine($"Log Loss: {metrics.LogLoss}");
+        Console.WriteLine($"Log Loss Reduction: {metrics.LogLossReduction}");
+        Console.WriteLine($"Positive Precision: {metrics.PositivePrecision}");
+        Console.WriteLine($"Positive Recall: {metrics.PositiveRecall}");
+        Console.WriteLine($"Negative Precision: {metrics.NegativePrecision}");
+        Console.WriteLine($"Negative Recall: {metrics.NegativeRecall}");
+
         var dataEnumerable =
             mlContext.Data.CreateEnumerable<ModelOutput>(transformedData,
                 false);
@@ -197,7 +211,8 @@ public class DecisionTreeBinaryTrainerTest
         [ColumnName(@"PredictedLabel")]
         public float PredictedLabel { get; set; }
 
-        [ColumnName(@"Score")] public float[] Score { get; set; }
+        [ColumnName(@"Score")] public float Score { get; set; }
+        [ColumnName(@"Probability")] public float Probability { get; set; }
     }
 
     #endregion

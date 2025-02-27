@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Italbytz.Adapters.Algorithms.AI.Learning.Framework;
 using Italbytz.Adapters.Algorithms.AI.Util.ML;
@@ -13,6 +14,7 @@ public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
 {
     private readonly ILearner _learner;
     private readonly string _target;
+    private IDataSetSpecification _spec;
 
     public DecisionTreeBinaryTrainer(string target)
     {
@@ -23,12 +25,14 @@ public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
     public ITransformer Fit(IDataView input)
     {
         var mlContext = new MLContext();
-        var dataSet = input.AsDataSet(_target);
+        _spec = input.GetDataSetSpecification(_target);
+        var dataSet = input.AsDataSet(_target, _spec);
         _learner.Train(dataSet);
 
         var pipeline =
             mlContext.Transforms.CustomMapping(
-                (Action<TModelInput, ClassificationMapping>)Mapping, null);
+                (Action<TModelInput, BinaryClassificationMapping>)Mapping,
+                null);
         return pipeline.Fit(input);
     }
 
@@ -37,19 +41,22 @@ public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
         throw new NotImplementedException();
     }
 
-    private void Mapping(TModelInput input, ClassificationMapping output)
+    private void Mapping(TModelInput input, BinaryClassificationMapping output)
     {
         var example = ToExample(input);
         var prediction = _learner.Predict(example);
         output.Features = new float[11];
-        output.PredictedLabel = prediction.Equals(Util.Util.Yes) ? 1 : 0;
-        output.Score = new float[2];
+        output.PredictedLabel = prediction.Equals("1") ? 1 : 0;
+        output.Score = prediction.Equals("1") ? 0f : 1f;
+        output.Probability = prediction.Equals("1") ? 0f : 1f;
     }
 
     private IExample ToExample(TModelInput input)
     {
         var type = typeof(TModelInput);
         var properties = type.GetProperties();
+
+        Dictionary<string, IAttribute> attributes = new();
 
         foreach (var property in properties)
         {
@@ -71,12 +78,20 @@ public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
                     ?.ToString();
             }
 
+            switch (value)
+            {
+                case null:
+                    continue;
+                case bool b:
+                    value = b ? Util.Util.Yes : Util.Util.No;
+                    break;
+            }
 
-            Console.WriteLine($"{name} = {value}");
+            attributes.Add(name,
+                new StringAttribute(value.ToString(),
+                    _spec.GetAttributeSpecFor(name)));
         }
 
-        Console.WriteLine(input);
-        return null;
-        return new Example(null, null);
+        return new Example(attributes, attributes[_target]);
     }
 }

@@ -89,9 +89,9 @@ public static class IDataViewExtensions
         return dss;
     }
 
-    public static IDataSet AsDataSet(this IDataView dataView, string target)
+    public static IDataSet AsDataSet(this IDataView dataView, string target,
+        IDataSetSpecification spec)
     {
-        var spec = dataView.GetDataSetSpecification(target);
         var dataSet = new DataSet(spec);
 
         using var cursor = dataView.GetRowCursor(dataView.Schema);
