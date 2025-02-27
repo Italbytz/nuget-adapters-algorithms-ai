@@ -47,8 +47,8 @@ public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
         var prediction = _learner.Predict(example);
         output.Features = new float[11];
         output.PredictedLabel = prediction.Equals("1") ? 1 : 0;
-        output.Score = prediction.Equals("1") ? 0f : 1f;
-        output.Probability = prediction.Equals("1") ? 0f : 1f;
+        output.Score = prediction.Equals("1") ? 1f : 0f;
+        output.Probability = prediction.Equals("1") ? 1f : 0f;
     }
 
     private IExample ToExample(TModelInput input)

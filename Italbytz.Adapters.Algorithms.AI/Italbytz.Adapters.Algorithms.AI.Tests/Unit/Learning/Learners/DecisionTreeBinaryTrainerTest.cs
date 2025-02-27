@@ -121,21 +121,18 @@ public class DecisionTreeBinaryTrainerTest
             mlContext.BinaryClassification.Evaluate(transformedData,
                 "will_wait");
 
-        Console.WriteLine($"Accuracy: {metrics.Accuracy}");
-        Console.WriteLine($"AUC: {metrics.AreaUnderRocCurve}");
-        Console.WriteLine($"F1 Score: {metrics.F1Score}");
-        Console.WriteLine($"Log Loss: {metrics.LogLoss}");
-        Console.WriteLine($"Log Loss Reduction: {metrics.LogLossReduction}");
-        Console.WriteLine($"Positive Precision: {metrics.PositivePrecision}");
-        Console.WriteLine($"Positive Recall: {metrics.PositiveRecall}");
-        Console.WriteLine($"Negative Precision: {metrics.NegativePrecision}");
-        Console.WriteLine($"Negative Recall: {metrics.NegativeRecall}");
-
-        var dataEnumerable =
-            mlContext.Data.CreateEnumerable<ModelOutput>(transformedData,
-                false);
-
-        var dataArray = dataEnumerable.ToArray();
+        Assert.Multiple(() =>
+        {
+            Assert.That(metrics.Accuracy, Is.EqualTo(1));
+            Assert.That(metrics.AreaUnderRocCurve, Is.EqualTo(1));
+            Assert.That(metrics.F1Score, Is.EqualTo(1));
+            Assert.That(metrics.LogLoss, Is.EqualTo(0));
+            Assert.That(metrics.LogLossReduction, Is.EqualTo(1));
+            Assert.That(metrics.PositivePrecision, Is.EqualTo(1));
+            Assert.That(metrics.PositiveRecall, Is.EqualTo(1));
+            Assert.That(metrics.NegativePrecision, Is.EqualTo(1));
+            Assert.That(metrics.NegativeRecall, Is.EqualTo(1));
+        });
     }
 
     /// <summary>
