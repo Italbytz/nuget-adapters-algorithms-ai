@@ -1,4 +1,5 @@
 using Italbytz.Adapters.Algorithms.AI.Search.Local;
+using Italbytz.Adapters.Algorithms.AI.Util;
 using Italbytz.Adapters.Algorithms.AI.Util.Datastructure;
 using Italbytz.Adapters.Algorithms.Tests.Environment.NQueens;
 using Italbytz.Ports.Algorithms.AI.Search.Local;
@@ -19,7 +20,7 @@ public class NQueensGeneticAlgorithmTests
             _loggerFactory =
                 LoggerFactory.Create(builder => builder.AddConsole());
     }
-    
+
     [TearDown]
     public void Cleanup()
     {
@@ -42,7 +43,7 @@ public class NQueensGeneticAlgorithmTests
         };
         var algo = new GeneticAlgorithm<int>(8, alphabet, 0.3);
         var initPopulation = new List<IIndividual<int>>();
-        var random = new Random();
+        var random = ThreadSafeRandomNetCore.LocalRandom;
         for (var i = 0; i < 100; i++)
         {
             var randomRepresentation = new List<int>(8);

@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Italbytz.Adapters.Algorithms.AI.Util;
 using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
 namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
@@ -23,7 +23,8 @@ public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal>
             if (current.IsSolution(csp)) return current;
             var variables = GetConflictedVariables(csp, current);
             var variable =
-                variables.ElementAt(new Random().Next(variables.Count));
+                variables.ElementAt(
+                    ThreadSafeRandomNetCore.LocalRandom.Next(variables.Count));
             var value = GetMinConflictValue(csp, variable, current);
             current.Add(variable, value);
         }
@@ -58,7 +59,7 @@ public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal>
         }
 
         return resultCandidates.ElementAt(
-            new Random().Next(resultCandidates.Count));
+            ThreadSafeRandomNetCore.LocalRandom.Next(resultCandidates.Count));
     }
 
     private ISet<TVar> GetConflictedVariables(ICSP<TVar, TVal> csp,
@@ -75,7 +76,8 @@ public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal>
         var variables =
             csp.Variables.Where(variable => !assignment.Contains(variable));
         var variable =
-            variables.ElementAt(new Random().Next(variables.Count()));
+            variables.ElementAt(
+                ThreadSafeRandomNetCore.LocalRandom.Next(variables.Count()));
         return variable;
     }
 
@@ -87,7 +89,8 @@ public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal>
             assignment.Add(variable,
                 csp.GetDomain(variable)
                     .ElementAt(
-                        new Random().Next(csp.GetDomain(variable).Count)));
+                        ThreadSafeRandomNetCore.LocalRandom.Next(
+                            csp.GetDomain(variable).Count)));
         return assignment;
     }
 }

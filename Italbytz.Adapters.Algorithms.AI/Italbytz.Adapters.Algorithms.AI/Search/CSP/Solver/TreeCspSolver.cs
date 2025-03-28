@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Italbytz.Adapters.Algorithms.AI.Util;
 using Italbytz.Ports.Algorithms.AI.Search.CSP;
 using Italbytz.Ports.Algorithms.AI.Search.CSP.Solver;
 
@@ -24,7 +25,8 @@ public class TreeCspSolver<TVar, TVal> : ICspSolver<TVar, TVal>
     {
         var assignment = new Assignment<TVar, TVal>();
         var root = _useRandom
-            ? csp.Variables.ElementAt(new Random().Next(csp.Variables.Count))
+            ? csp.Variables.ElementAt(
+                ThreadSafeRandomNetCore.LocalRandom.Next(csp.Variables.Count))
             : csp.Variables.First();
         var orderedVariables = new List<TVar>();
         var parentConstraints = new Dictionary<TVar, IConstraint<TVar, TVal>>();
