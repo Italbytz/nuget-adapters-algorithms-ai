@@ -7,45 +7,49 @@ using System.Collections.Generic;
 using Italbytz.Ports.Algorithms.AI.Problem;
 using Italbytz.Ports.Algorithms.AI.Search;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Framework.Problem
+namespace Italbytz.Adapters.Algorithms.AI.Search.Framework.Problem;
+
+/// <inheritdoc />
+public class GeneralProblem<TState, TAction> : IProblem<TState, TAction>
 {
-    public class GeneralProblem<TState, TAction> : IProblem<TState, TAction>
+    public GeneralProblem(TState initialState,
+        Func<TState, List<TAction>> actions,
+        Func<TState, TAction, TState> result,
+        Func<TState, bool> goalTest,
+        Func<TState, TAction, TState, double> stepCosts)
     {
-        public TState InitialState { get; } 
+        InitialState = initialState;
+        Actions = actions;
+        Result = result;
+        GoalTest = goalTest;
+        StepCosts = stepCosts;
+    }
 
-        public Func<TState, TAction, TState> Result { get; }
+    public GeneralProblem(TState initialState,
+        Func<TState, List<TAction>> actions,
+        Func<TState, TAction, TState> result,
+        Func<TState, bool> goalTest) : this(initialState, actions, result,
+        goalTest, (s, a, sPrimed) => 1.0)
+    {
+    }
 
-        public Func<TState, List<TAction>> Actions { get; }
+    public TState InitialState { get; }
 
-        public Func<TState, bool> GoalTest { get; }
+    public Func<TState, TAction, TState> Result { get; }
 
-        public Func<TState, TAction, TState, double> StepCosts { get; }
+    public Func<TState, List<TAction>> Actions { get; }
 
-        public GeneralProblem(TState initialState, Func<TState, List<TAction>> actions, Func<TState, TAction, TState> result,
-            Func<TState, bool> goalTest, Func<TState, TAction, TState, double> stepCosts)
-        {
-            InitialState = initialState;
-            Actions = actions;
-            Result = result;
-            GoalTest = goalTest;
-            StepCosts = stepCosts;
-        }
+    public Func<TState, bool> GoalTest { get; }
 
-        public GeneralProblem(TState initialState, Func<TState, List<TAction>> actions, Func<TState, TAction, TState> result,
-        Func<TState, bool> goalTest) : this(initialState, actions, result, goalTest, (s, a, sPrimed) => 1.0)
-        {
-        }
+    public Func<TState, TAction, TState, double> StepCosts { get; }
 
-        public double GetStepCosts(TState state, TAction action, TState stateDelta)
-        {
-            throw new NotImplementedException();
-        }
+    public bool TestSolution(INode<TState, TAction> node)
+    {
+        return GoalTest(node.State);
+    }
 
-        public bool TestSolution(INode<TState, TAction> node)
-        {
-            return GoalTest(node.State);
-        }
-
+    public double GetStepCosts(TState state, TAction action, TState stateDelta)
+    {
+        throw new NotImplementedException();
     }
 }
-
