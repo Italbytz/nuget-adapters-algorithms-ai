@@ -9,7 +9,7 @@ using Italbytz.Ports.Algorithms.AI.Search;
 
 namespace Italbytz.Adapters.Algorithms.AI.Search.Framework.Problem;
 
-/// <inheritdoc [ cref="IProblem{TState,TAction}"] />
+/// <inheritdoc cref="IProblem{TState,TAction}" />
 public class GeneralProblem<TState, TAction> : IProblem<TState, TAction>
 {
     public GeneralProblem(TState initialState,
