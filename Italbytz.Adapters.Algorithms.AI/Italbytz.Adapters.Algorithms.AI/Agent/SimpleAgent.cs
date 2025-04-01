@@ -7,19 +7,24 @@ using Italbytz.Ports.Algorithms.AI.Agent;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Italbytz.Adapters.Algorithms.AI.Agent
+namespace Italbytz.Adapters.Algorithms.AI.Agent;
+
+/// <inheritdoc cref="IAgent{TPercept,TAction}" />
+public class SimpleAgent<TPercept, TAction> : IAgent<TPercept, TAction>
 {
-    public class SimpleAgent<TPercept, TAction> : IAgent<TPercept, TAction>
+    protected SimpleAgent(ILoggerFactory loggerFactory)
     {
-        protected SimpleAgent(ILoggerFactory loggerFactory) =>
-            LoggingExtensions.InitLoggers(loggerFactory);
+        LoggingExtensions.InitLoggers(loggerFactory);
+    }
 
-        protected SimpleAgent() : this(NullLoggerFactory.Instance)
-        {
-        }
+    protected SimpleAgent() : this(NullLoggerFactory.Instance)
+    {
+    }
 
-        public bool Alive { get; } = true;
+    public bool Alive { get; } = true;
 
-        public virtual TAction? Act(TPercept? percept) => default;
+    public virtual TAction? Act(TPercept? percept)
+    {
+        return default;
     }
 }

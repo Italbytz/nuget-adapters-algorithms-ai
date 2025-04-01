@@ -3,6 +3,7 @@ using Italbytz.Ports.Algorithms.AI.Learning;
 
 namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
 
+/// <inheritdoc cref="IExample" />
 public class Example : IExample
 {
     private readonly IAttribute _targetAttribute;

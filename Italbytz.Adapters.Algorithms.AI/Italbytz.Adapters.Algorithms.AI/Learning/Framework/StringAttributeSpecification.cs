@@ -4,6 +4,7 @@ using Italbytz.Ports.Algorithms.AI.Learning;
 
 namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
 
+/// <inheritdoc cref="IAttributeSpecification" />
 public class StringAttributeSpecification : IAttributeSpecification
 {
     public StringAttributeSpecification(string attributeName,

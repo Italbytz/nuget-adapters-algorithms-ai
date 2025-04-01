@@ -6,6 +6,7 @@ using Italbytz.Ports.Algorithms.AI.Learning;
 
 namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
 
+/// <inheritdoc cref="IDataSet" />
 public class DataSet : IDataSet
 {
     public DataSet(IDataSetSpecification spec)

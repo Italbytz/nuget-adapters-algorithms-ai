@@ -4,16 +4,18 @@
 
 using Italbytz.Ports.Algorithms.AI.Agent;
 
-namespace Italbytz.Adapters.Algorithms.AI.Agent
+namespace Italbytz.Adapters.Algorithms.AI.Agent;
+
+/// <inheritdoc cref="IAction" />
+public class DynamicAction : ObjectWithDynamicAttributes, IAction
 {
-    public class DynamicAction : ObjectWithDynamicAttributes, IAction
+    private const string AttributeName = "name";
+
+
+    protected DynamicAction(string name)
     {
-        private const string AttributeName = "name";
-
-
-        protected DynamicAction(string name) =>
-            Attributes[AttributeName] = name;
-
-        public string Name => (string)Attributes[AttributeName];
+        Attributes[AttributeName] = name;
     }
+
+    public string Name => (string)Attributes[AttributeName];
 }

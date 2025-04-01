@@ -5,6 +5,7 @@ using Italbytz.Ports.Algorithms.AI.Learning;
 
 namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
 
+/// <inheritdoc cref="IDataSetSpecification" />
 public class DataSetSpecification : IDataSetSpecification
 {
     private readonly List<IAttributeSpecification> _attributeSpecifications;
