@@ -208,7 +208,7 @@ public class DecisionTreeBinaryTrainerTest
         [ColumnName(@"PredictedLabel")]
         public float PredictedLabel { get; set; }
 
-        [ColumnName(@"Score")] public float Score { get; set; }
+        [ColumnName(@"Score")] public float[] Score { get; set; }
         [ColumnName(@"Probability")] public float Probability { get; set; }
     }
 
@@ -228,6 +228,7 @@ public class DecisionTreeBinaryTrainerTest
         public float PredictedLabel { get; set; }
 
         [ColumnName(@"Score")] public float[] Score { get; set; }
+        [ColumnName(@"Probability")] public float Probability { get; set; }
     }
 
     #endregion
