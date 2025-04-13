@@ -51,4 +51,6 @@ public class Individual : IIndividual
                $"Fitness {string.Join(",", LatestKnownFitness ?? Array.Empty<double>())}" ??
                string.Empty;
     }
+    
+    
 }
