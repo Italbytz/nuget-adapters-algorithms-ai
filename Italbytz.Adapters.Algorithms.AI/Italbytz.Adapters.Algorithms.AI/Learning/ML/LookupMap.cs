@@ -9,7 +9,7 @@ namespace Italbytz.Adapters.Algorithms.AI.Learning.ML;
 /// <param name="key"></param>
 public class LookupMap<TKey>(TKey key)
 {
-    private TKey Key { get; } = key;
+    public TKey Key { get; } = key;
 
     /// <summary>
     ///     Gets the reverse mapping of the lookup data.
