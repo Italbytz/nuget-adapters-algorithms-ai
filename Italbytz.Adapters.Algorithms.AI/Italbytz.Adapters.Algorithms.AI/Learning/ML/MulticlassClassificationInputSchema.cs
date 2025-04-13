@@ -6,5 +6,5 @@ namespace Italbytz.Adapters.Algorithms.AI.Learning.ML;
 public class MulticlassClassificationInputSchema : ICustomMappingInputSchema
 {
     /// <inheritdoc />
-    public required float[] Features { get; set; }
+    public float[] Features { get; set; }
 }
