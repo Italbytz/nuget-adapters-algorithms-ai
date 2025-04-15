@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+using Italbytz.Adapters.Algorithms.AI.Learning.ML;
 using Italbytz.Adapters.Algorithms.AI.Util.ML;
 using Italbytz.Ports.Algorithms.AI.Learning;
 using Microsoft.ML;
@@ -31,7 +32,7 @@ public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
 
         var pipeline =
             mlContext.Transforms.CustomMapping(
-                (Action<TModelInput, BinaryClassificationMapping>)Mapping,
+                (Action<TModelInput, BinaryClassificationOutputSchema>)Mapping,
                 null);
         return pipeline.Fit(input);
     }
@@ -41,12 +42,12 @@ public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
         throw new NotImplementedException();
     }
 
-    private void Mapping(TModelInput input, BinaryClassificationMapping output)
+    private void Mapping(TModelInput input,
+        BinaryClassificationOutputSchema output)
     {
         var example = ToExample(input);
         var prediction = _learner.Predict(example);
-        output.Features = new float[11];
-        output.PredictedLabel = prediction.Equals("1") ? 1 : 0;
+        output.PredictedLabel = (uint)(prediction.Equals("1") ? 1 : 0);
         output.Score = prediction.Equals("1") ? 1f : 0f;
         output.Probability = prediction.Equals("1") ? 1f : 0f;
     }
