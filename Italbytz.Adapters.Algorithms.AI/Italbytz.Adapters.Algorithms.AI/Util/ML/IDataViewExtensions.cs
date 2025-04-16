@@ -113,12 +113,26 @@ public static class IDataViewExtensions
 
         foreach (DataRow row in dt.Rows)
         {
-            IEnumerable<string> fields =
-                row.ItemArray.Select(field => field.ToString());
+            var fields =
+                row.ItemArray.Select(InvariantCultureString);
             sb.AppendLine(string.Join(",", fields));
         }
 
         File.WriteAllText(filePath, sb.ToString());
+    }
+
+    private static string InvariantCultureString(object field)
+    {
+        var returnValue = field.GetType() switch
+        {
+            { } floatType when floatType == typeof(float) => ((float)field)
+                .ToString(CultureInfo.InvariantCulture),
+            { } doubleType when doubleType == typeof(double) => ((double)field)
+                .ToString(CultureInfo.InvariantCulture),
+            _ => field.ToString()
+        };
+
+        return returnValue;
     }
 
     /// <summary>
@@ -286,12 +300,14 @@ public static class IDataViewExtensions
     }
 
     /// <summary>
-    ///    Converts an <see cref="IDataView" /> to a <see cref="DataSet" />.
+    ///     Converts an <see cref="IDataView" /> to a <see cref="DataSet" />.
     /// </summary>
     /// <param name="target">The name of the target attribute.</param>
     /// <param name="spec">The data set specification.</param>
-    /// <returns>A <see cref="DataSet" /> representing the data in the
-    ///     <see cref="IDataView" />.</returns>
+    /// <returns>
+    ///     A <see cref="DataSet" /> representing the data in the
+    ///     <see cref="IDataView" />.
+    /// </returns>
     /// <remarks>
     ///     This method creates a new <see cref="DataSet" /> and populates it with
     ///     the data from the <see cref="IDataView" />.
