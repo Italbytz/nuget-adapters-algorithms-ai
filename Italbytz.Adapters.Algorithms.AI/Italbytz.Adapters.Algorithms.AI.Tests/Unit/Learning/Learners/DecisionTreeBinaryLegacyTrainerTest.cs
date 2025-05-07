@@ -14,7 +14,7 @@ public class DecisionTreeBinaryLegacyTrainerTest
         var mlContext = new MLContext();
         var path = Path.Combine(TestContext.CurrentContext.TestDirectory,
             "Data", "restaurant_recoded.csv");
-        _data = mlContext.Data.LoadFromTextFile<ModelInput>(
+        _data = mlContext.Data.LoadFromTextFile<RestaurantModelInputLegacy>(
             path,
             ',', true);
     }
@@ -24,7 +24,7 @@ public class DecisionTreeBinaryLegacyTrainerTest
     {
         var mlContext = new MLContext();
 
-        var samples = new List<ModelInput>
+        var samples = new List<RestaurantModelInputLegacy>
         {
             new()
             {
@@ -39,7 +39,8 @@ public class DecisionTreeBinaryLegacyTrainerTest
 
         var pipeline =
             mlContext.Transforms.CustomMapping(
-                (Action<ModelInput, ModelMapping>)Mapping, null);
+                (Action<RestaurantModelInputLegacy, ModelMapping>)Mapping,
+                null);
 
         var transformer = pipeline.Fit(data);
         var transformedData = transformer.Transform(data);
@@ -53,7 +54,7 @@ public class DecisionTreeBinaryLegacyTrainerTest
         Assert.That(dataArray[0].PredictedLabel, Is.EqualTo(1));
     }
 
-    private void Mapping(ModelInput input, ModelMapping output)
+    private void Mapping(RestaurantModelInputLegacy input, ModelMapping output)
     {
         output.Features = new float[11];
         output.PredictedLabel = 1;
@@ -113,7 +114,9 @@ public class DecisionTreeBinaryLegacyTrainerTest
         TestInducedTreeClassifiesDataSetCorrectly()
     {
         var mlContext = new MLContext();
-        var trainer = new DecisionTreeBinaryLegacyTrainer<ModelInput>("will_wait");
+        var trainer =
+            new DecisionTreeBinaryLegacyTrainer<RestaurantModelInputLegacy>(
+                "will_wait");
         var transformer = trainer.Fit(_data);
         var transformedData = transformer.Transform(_data);
 
@@ -134,55 +137,6 @@ public class DecisionTreeBinaryLegacyTrainerTest
             Assert.That(metrics.NegativeRecall, Is.EqualTo(1));
         });
     }
-
-    /// <summary>
-    ///     model input class for Restaurant.
-    /// </summary>
-
-    #region model input class
-
-    public class ModelInput
-    {
-        [LoadColumn(0)]
-        [ColumnName(@"alternate")]
-        public bool Alternate { get; set; }
-
-        [LoadColumn(1)] [ColumnName(@"bar")] public bool Bar { get; set; }
-
-        [LoadColumn(2)]
-        [ColumnName(@"fri/sat")]
-        public bool Fri_sat { get; set; }
-
-        [LoadColumn(3)]
-        [ColumnName(@"hungry")]
-        public bool Hungry { get; set; }
-
-        [LoadColumn(4)]
-        [ColumnName(@"patrons")]
-        public string Patrons { get; set; }
-
-        [LoadColumn(5)] [ColumnName(@"price")] public string Price { get; set; }
-
-        [LoadColumn(6)]
-        [ColumnName(@"raining")]
-        public bool Raining { get; set; }
-
-        [LoadColumn(7)]
-        [ColumnName(@"reservation")]
-        public bool Reservation { get; set; }
-
-        [LoadColumn(8)] [ColumnName(@"type")] public string Type { get; set; }
-
-        [LoadColumn(9)]
-        [ColumnName(@"wait_estimate")]
-        public string Wait_estimate { get; set; }
-
-        [LoadColumn(10)]
-        [ColumnName(@"will_wait")]
-        public float Will_wait { get; set; }
-    }
-
-    #endregion
 
     /// <summary>
     ///     model output class for Restaurant.
