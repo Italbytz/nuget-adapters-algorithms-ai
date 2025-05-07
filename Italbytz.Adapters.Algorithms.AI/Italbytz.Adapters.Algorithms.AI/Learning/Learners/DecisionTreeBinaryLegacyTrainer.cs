@@ -10,14 +10,14 @@ using Microsoft.ML.Data;
 
 namespace Italbytz.Adapters.Algorithms.AI.Learning.Learners;
 
-public class DecisionTreeBinaryTrainer<TModelInput> : IEstimator<ITransformer>
+public class DecisionTreeBinaryLegacyTrainer<TModelInput> : IEstimator<ITransformer>
     where TModelInput : class, new()
 {
     private readonly ILearner _learner;
     private readonly string _target;
     private IDataSetSpecification _spec;
 
-    public DecisionTreeBinaryTrainer(string target)
+    public DecisionTreeBinaryLegacyTrainer(string target)
     {
         _target = target;
         _learner = new DecisionTreeLearner();

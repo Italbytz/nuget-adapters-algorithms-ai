@@ -4,7 +4,7 @@ using Microsoft.ML.Data;
 
 namespace Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Learners;
 
-public class DecisionTreeBinaryTrainerTest
+public class DecisionTreeBinaryLegacyTrainerTest
 {
     private IDataView _data;
 
@@ -113,7 +113,7 @@ public class DecisionTreeBinaryTrainerTest
         TestInducedTreeClassifiesDataSetCorrectly()
     {
         var mlContext = new MLContext();
-        var trainer = new DecisionTreeBinaryTrainer<ModelInput>("will_wait");
+        var trainer = new DecisionTreeBinaryLegacyTrainer<ModelInput>("will_wait");
         var transformer = trainer.Fit(_data);
         var transformedData = transformer.Transform(_data);
 
