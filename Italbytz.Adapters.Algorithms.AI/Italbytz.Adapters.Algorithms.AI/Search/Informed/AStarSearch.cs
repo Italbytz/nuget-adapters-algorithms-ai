@@ -17,7 +17,7 @@ namespace Italbytz.Adapters.Algorithms.AI.Search.Informed
         private static Func<INode<TState,TAction>,double> CreateEvalFn(Func<INode<TState,TAction>,double> heuristicFn)
         {
             return node => node.PathCost + heuristicFn(node);
-            return;
+            
         }
     }
 }
