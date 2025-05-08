@@ -56,6 +56,12 @@ public class DataSetSpecification : IDataSetSpecification
     {
         _attributeSpecifications.Add(new StringAttributeSpecification(name,
             attributeValues));
-        TargetAttribute = name;
+        TargetAttribute = name; // target defaults to last column added
+    }
+
+    public void DefineNumericAttribute(string name)
+    {
+        _attributeSpecifications.Add(new NumericAttributeSpecification(name));
+        TargetAttribute = name; // target defaults to last column added
     }
 }
