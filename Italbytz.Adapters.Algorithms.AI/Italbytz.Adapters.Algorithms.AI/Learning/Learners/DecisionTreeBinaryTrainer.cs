@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Italbytz.Adapters.Algorithms.AI.Learning.Framework;
 using Italbytz.ML;
 using Italbytz.Ports.Algorithms.AI.Learning;
@@ -55,11 +57,14 @@ public class DecisionTreeBinaryTrainer : IEstimator<ITransformer>
                     spec.GetAttributeSpecFor(featureName);
                 var value = feature[columnIndex];
                 attributes.Add(featureName,
-                    new NumericAttribute(value, columnSpecification));
+                    new StringAttribute(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        columnSpecification));
                 columnIndex++;
             }
 
-            var targetAttribute = new NumericAttribute(labels[rowIndex],
+            var targetAttribute = new StringAttribute(
+                labels[rowIndex].ToString(),
                 spec.GetAttributeSpecFor(DefaultColumnNames.Label));
             attributes.Add(DefaultColumnNames.Label, targetAttribute);
             var example = new Example(attributes, targetAttribute);
@@ -76,8 +81,14 @@ public class DecisionTreeBinaryTrainer : IEstimator<ITransformer>
         var featureNames = dataExcerpt.FeatureNames;
         var dss = new DataSetSpecification();
         foreach (var featureName in featureNames)
-            dss.DefineNumericAttribute(featureName);
-        dss.DefineNumericAttribute(DefaultColumnNames.Label);
+            dss.DefineStringAttribute(featureName,
+                dataExcerpt.GetUniqueFeatureValues(featureName)
+                    .Select(v => v.ToString(CultureInfo.InvariantCulture))
+                    .ToArray());
+        dss.DefineStringAttribute(DefaultColumnNames.Label,
+            dataExcerpt.UniqueLabelValues
+                .Select(v => v.ToString(CultureInfo.InvariantCulture))
+                .ToArray());
         return dss;
     }
 }
