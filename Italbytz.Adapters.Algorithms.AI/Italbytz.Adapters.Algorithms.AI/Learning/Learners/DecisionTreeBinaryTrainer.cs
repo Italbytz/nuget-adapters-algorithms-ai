@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -22,8 +21,14 @@ public class DecisionTreeBinaryTrainer : IEstimator<ITransformer>
     /// <inheritdoc />
     public SchemaShape GetOutputSchema(SchemaShape inputSchema)
     {
-        //throw new NotImplementedException();
-        return inputSchema;
+        var mlContext = ThreadSafeMLContext.LocalMLContext;
+        var mapping = new DecisionTreeMapping(_learner, null, null);
+        return mlContext.Transforms
+            .CustomMapping(
+                mapping
+                    .GetMapping<BinaryClassificationInputSchema,
+                        BinaryClassificationOutputSchema>(), null)
+            .GetOutputSchema(inputSchema);
     }
 
     /// <inheritdoc />
@@ -34,7 +39,13 @@ public class DecisionTreeBinaryTrainer : IEstimator<ITransformer>
             GetDataSetSpecification(dataExcerpt);
         var dataSet = GetDataSet(dataExcerpt, spec);
         _learner.Train(dataSet);
-        throw new NotImplementedException();
+        var mlContext = ThreadSafeMLContext.LocalMLContext;
+        var mapping = new DecisionTreeMapping(_learner, dataExcerpt, spec);
+        return mlContext.Transforms
+            .CustomMapping(
+                mapping
+                    .GetMapping<BinaryClassificationInputSchema,
+                        BinaryClassificationOutputSchema>(), null).Fit(input);
     }
 
     private IDataSet GetDataSet(IDataExcerpt dataExcerpt,
