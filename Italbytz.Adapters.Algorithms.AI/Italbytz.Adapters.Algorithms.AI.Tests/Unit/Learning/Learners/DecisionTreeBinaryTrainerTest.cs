@@ -79,4 +79,69 @@ public class DecisionTreeBinaryTrainerTest
 
         return pipeline;
     }
+
+    [Test]
+    public void TestCustomMapper()
+    {
+        var mlContext = new MLContext();
+
+        var samples = new List<InputData>
+        {
+            new() { Age = 16 },
+            new() { Age = 35 },
+            new() { Age = 60 },
+            new() { Age = 28 }
+        };
+
+        var data = mlContext.Data.LoadFromEnumerable(samples);
+
+        void Mapping(InputData input, CustomMappingOutput output)
+        {
+            output.AgeName = input.Age switch
+            {
+                < 18 => "Child",
+                < 55 => "Man",
+                _ => "Grandpa"
+            };
+        }
+
+        var pipeline =
+            mlContext.Transforms.CustomMapping(
+                (Action<InputData, CustomMappingOutput>)Mapping, null);
+
+        var transformer = pipeline.Fit(data);
+        var transformedData = transformer.Transform(data);
+
+        var dataEnumerable =
+            mlContext.Data.CreateEnumerable<TransformedData>(transformedData,
+                false);
+
+        var dataArray = dataEnumerable.ToArray();
+
+        Assert.That(dataArray, Has.Length.EqualTo(4));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataArray[0].AgeName, Is.EqualTo("Child"));
+            Assert.That(dataArray[1].AgeName, Is.EqualTo("Man"));
+            Assert.That(dataArray[2].AgeName, Is.EqualTo("Grandpa"));
+            Assert.That(dataArray[3].AgeName, Is.EqualTo("Man"));
+        });
+    }
+}
+
+internal class InputData
+{
+    public int Age { get; set; }
+}
+
+internal class CustomMappingOutput
+{
+    public string AgeName { get; set; }
+}
+
+internal class TransformedData
+{
+    public int Age { get; set; }
+
+    public string AgeName { get; set; }
 }
