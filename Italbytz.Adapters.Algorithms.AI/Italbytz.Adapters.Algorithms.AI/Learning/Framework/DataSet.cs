@@ -52,8 +52,9 @@ public class DataSet : IDataSet
         foreach (var parameterValue in dict.Keys)
         {
             var reducedDataSetSize = dict[parameterValue].Examples.Count;
-            remainder += reducedDataSetSize / totalSize *
-                         dict[parameterValue].GetInformationFor();
+            var information = dict[parameterValue].GetInformationFor();
+            remainder += (double)reducedDataSetSize / totalSize *
+                         information;
         }
 
         return GetInformationFor() - remainder;
