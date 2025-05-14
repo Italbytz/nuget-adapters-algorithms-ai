@@ -25,16 +25,4 @@
         <ProjectReference Include="..\Italbytz.Adapters.Algorithms.AI\Italbytz.Adapters.Algorithms.AI.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <None Update="Data\restaurant_recoded.csv">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="Data\restaurantcomplete_recoded.csv">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="Data\restaurant_categories.csv">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
-
 </Project>
