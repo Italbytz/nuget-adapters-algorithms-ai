@@ -38,6 +38,7 @@ Here is a table of algorithms, the figure, name of the code in the book, and the
 |6.8|221|Min-Conflicts|[MinConflictsSolver](/Italbytz.Adapters.Algorithms.AI/Italbytz.Adapters.Algorithms.AI/Search/CSP/Solver/MinConflictsSolver.cs)|
 |6.11|224|Tree-CSP-Solver|[TreeCspSolver](/Italbytz.Adapters.Algorithms.AI/Italbytz.Adapters.Algorithms.AI/Search/CSP/Solver/TreeCspSolver.cs)|
 |18.5|702|Decision-Tree-Learning|[DecisionTreeLearner](/Italbytz.Adapters.Algorithms.AI/Italbytz.Adapters.Algorithms.AI/Learning/Learners/DecisionTreeLearner.cs)|
+|18.8|710|Cross-Validation-Wrapper|[CrossValidation](/Italbytz.Adapters.Algorithms.AI/Italbytz.Adapters.Algorithms.AI/Learning/Inductive/CrossValidation.cs)|
 
 
 # Getting Started
