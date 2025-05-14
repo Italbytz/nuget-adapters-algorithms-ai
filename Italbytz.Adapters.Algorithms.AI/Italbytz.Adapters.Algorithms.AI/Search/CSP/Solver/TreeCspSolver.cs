@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
-using Italbytz.Ports.Algorithms.AI.Search.CSP.Solver;
+using Italbytz.AI.Util;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
+namespace Italbytz.AI.Search.CSP.Solver;
 
 public class TreeCspSolver<TVar, TVal> : ICspSolver<TVar, TVal>
     where TVar : IVariable

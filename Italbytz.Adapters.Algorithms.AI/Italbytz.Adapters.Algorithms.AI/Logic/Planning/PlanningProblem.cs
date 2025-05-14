@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using Italbytz.Adapters.Algorithms.AI.Util.MathUtils.Permute;
-using Italbytz.Ports.Algorithms.AI.Logic.Fol.Kb.Data;
-using Italbytz.Ports.Algorithms.AI.Logic.Fol.Parsing.Ast;
-using Italbytz.Ports.Algorithms.AI.Logic.Planning;
+using Italbytz.AI.Logic.Fol.Kb.Data;
+using Italbytz.AI.Logic.Fol.Parsing.Ast;
+using Italbytz.AI.Util.MathUtils.Permute;
 
-namespace Italbytz.Adapters.Algorithms.AI.Logic.Planning;
+namespace Italbytz.AI.Logic.Planning;
 
 public class PlanningProblem : IPlanningProblem
 {

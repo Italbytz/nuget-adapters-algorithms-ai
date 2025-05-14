@@ -3,11 +3,9 @@
 // Copyright (c) 2015 aima-java contributors
 
 using System;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework;
-using Italbytz.Ports.Algorithms.AI.Search;
-using Italbytz.Ports.Algorithms.AI.Search.Adversarial;
+using Italbytz.AI.Search.Framework;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Adversarial;
+namespace Italbytz.AI.Search.Adversarial;
 
 /// <summary>
 ///     An algorithm for calculating minimax decisions with alpha-beta-pruning. It
@@ -23,14 +21,16 @@ namespace Italbytz.Adapters.Algorithms.AI.Search.Adversarial;
 /// <typeparam name="TPlayer">Type which is used for players in the game.</typeparam>
 public class
     AlphaBetaSearch<TState, TAction, TPlayer> : IAdversarialSearch<TState,
-        TAction>
+    TAction>
 {
     public const string MetricNodesExpanded = "nodesExpanded";
 
     private readonly IGame<TState, TAction, TPlayer> game;
 
-    public AlphaBetaSearch(IGame<TState, TAction, TPlayer> game) =>
+    public AlphaBetaSearch(IGame<TState, TAction, TPlayer> game)
+    {
         this.game = game;
+    }
 
     public IMetrics Metrics { get; private set; } = new Metrics();
 
@@ -89,6 +89,8 @@ public class
 
 
     public static MinimaxSearch<TState, TAction, TPlayer> CreateFor(
-        IGame<TState, TAction, TPlayer> game) =>
-        new(game);
+        IGame<TState, TAction, TPlayer> game)
+    {
+        return new MinimaxSearch<TState, TAction, TPlayer>(game);
+    }
 }

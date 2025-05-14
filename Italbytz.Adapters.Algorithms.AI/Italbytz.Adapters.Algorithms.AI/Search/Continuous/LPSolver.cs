@@ -2,12 +2,11 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Search.Continuous;
+using Italbytz.AI.Util;
 using LpSolveDotNet;
 using Microsoft.Extensions.Logging;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Continuous;
+namespace Italbytz.AI.Search.Continuous;
 
 public class LPSolver : ILPSolver
 {

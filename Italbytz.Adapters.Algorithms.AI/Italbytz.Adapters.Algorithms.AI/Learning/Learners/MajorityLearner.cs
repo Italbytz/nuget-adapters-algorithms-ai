@@ -1,7 +1,11 @@
-using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Learning;
+// The original version of this file is part of <see href="https://github.com/aimacode/aima-java"/> which is released under
+// MIT License
+// Copyright (c) 2015 aima-java contributors
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Learners;
+using System;
+using System.Linq;
+
+namespace Italbytz.AI.Learning.Learners;
 
 public class MajorityLearner : ILearner
 {
@@ -15,7 +19,7 @@ public class MajorityLearner : ILearner
 
     public string[] Predict(IDataSet ds)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public string Predict(IExample e)

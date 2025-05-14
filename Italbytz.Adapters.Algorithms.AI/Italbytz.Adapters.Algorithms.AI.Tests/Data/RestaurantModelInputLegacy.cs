@@ -1,6 +1,6 @@
 using Microsoft.ML.Data;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Learners;
+namespace Italbytz.AI.Tests.Data;
 
 /// <summary>
 ///     model input class for Restaurant.

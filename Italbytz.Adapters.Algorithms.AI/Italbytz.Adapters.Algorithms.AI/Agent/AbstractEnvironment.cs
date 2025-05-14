@@ -3,9 +3,8 @@
 // Copyright (c) 2015 aima-java contributors
 
 using System.Diagnostics;
-using Italbytz.Ports.Algorithms.AI.Agent;
 
-namespace Italbytz.Adapters.Algorithms.AI.Agent;
+namespace Italbytz.AI.Agent;
 
 /// <inheritdoc cref="IEnvironment{TPercept,TAction}" />
 public abstract class

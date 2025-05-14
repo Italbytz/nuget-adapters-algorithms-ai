@@ -1,8 +1,7 @@
 using System;
 using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Individuals;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.GP.Individuals;
+namespace Italbytz.AI.Search.GP.Individuals;
 
 /// <inheritdoc cref="IIndividual" />
 public class Individual : IIndividual
@@ -51,6 +50,4 @@ public class Individual : IIndividual
                $"Fitness {string.Join(",", LatestKnownFitness ?? Array.Empty<double>())}" ??
                string.Empty;
     }
-    
-    
 }

@@ -3,20 +3,21 @@
 // Copyright (c) 2015 aima-java contributors
 
 using System;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework.QSearch;
-using Italbytz.Ports.Algorithms.AI.Search;
+using Italbytz.AI.Search.Framework.QSearch;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Informed
+namespace Italbytz.AI.Search.Informed;
+
+public class AStarSearch<TState, TAction> : BestFirstSearch<TState, TAction>
 {
-    public class AStarSearch<TState, TAction> : BestFirstSearch<TState, TAction>
+    public AStarSearch(QueueSearch<TState, TAction> impl,
+        Func<INode<TState, TAction>, double> heuristicFn) : base(impl,
+        CreateEvalFn(heuristicFn))
     {
-        public AStarSearch(QueueSearch<TState, TAction> impl, Func<INode<TState, TAction>, double> heuristicFn) : base(impl, CreateEvalFn(heuristicFn))
-        {
-        }
+    }
 
-        private static Func<INode<TState,TAction>,double> CreateEvalFn(Func<INode<TState,TAction>,double> heuristicFn)
-        {
-            return node => node.PathCost + heuristicFn(node); 
-        }
+    private static Func<INode<TState, TAction>, double> CreateEvalFn(
+        Func<INode<TState, TAction>, double> heuristicFn)
+    {
+        return node => node.PathCost + heuristicFn(node);
     }
 }

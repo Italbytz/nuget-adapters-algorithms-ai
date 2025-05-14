@@ -1,6 +1,6 @@
-using Italbytz.Adapters.Algorithms.AI.Logic.Planning;
+using Italbytz.AI.Logic.Planning;
 
-namespace Italbytz.Adapters.Algorithms.AI.Tests.Unit.Logic;
+namespace Italbytz.AI.Tests.Unit.Logic.Planning;
 
 public class UtilsTest
 {

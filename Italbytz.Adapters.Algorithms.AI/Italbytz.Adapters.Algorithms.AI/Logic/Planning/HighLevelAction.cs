@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Italbytz.Ports.Algorithms.AI.Logic.Fol.Parsing.Ast;
-using Italbytz.Ports.Algorithms.AI.Logic.Planning;
+using Italbytz.AI.Logic.Fol.Parsing.Ast;
 
-namespace Italbytz.Adapters.Algorithms.AI.Logic.Planning;
+namespace Italbytz.AI.Logic.Planning;
 
 public class HighLevelAction : ActionSchema
 {

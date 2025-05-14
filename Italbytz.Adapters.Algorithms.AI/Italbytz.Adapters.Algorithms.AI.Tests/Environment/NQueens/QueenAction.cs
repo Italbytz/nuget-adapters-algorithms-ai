@@ -2,10 +2,10 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Agent;
-using Italbytz.Adapters.Algorithms.AI.Util.Datastructure;
+using Italbytz.AI.Agent;
+using Italbytz.AI.Util.Datastructure;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.NQueens;
+namespace Italbytz.AI.Tests.Environment.NQueens;
 
 public class QueenAction : DynamicAction
 {
@@ -15,8 +15,10 @@ public class QueenAction : DynamicAction
 
     private const string ATTRIBUTE_QUEEN_LOC = "location";
 
-    public QueenAction(string type, XYLocation loc) : base(type) =>
+    public QueenAction(string type, XYLocation loc) : base(type)
+    {
         Attributes[ATTRIBUTE_QUEEN_LOC] = loc;
+    }
 
     public XYLocation Location => (XYLocation)Attributes[ATTRIBUTE_QUEEN_LOC];
     public int X => Location.X;

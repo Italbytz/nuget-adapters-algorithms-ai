@@ -2,9 +2,9 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.Tests.Environment.Map;
+using Italbytz.AI.Tests.Environment.Map;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.TwoPly;
+namespace Italbytz.AI.Tests.Environment.TwoPly;
 
 public class TwoPlyGameTree
 {

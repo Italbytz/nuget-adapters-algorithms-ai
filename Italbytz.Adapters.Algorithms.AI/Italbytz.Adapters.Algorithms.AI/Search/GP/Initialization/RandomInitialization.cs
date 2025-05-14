@@ -1,9 +1,6 @@
-using Italbytz.Adapters.Algorithms.AI.Search.GP.Individuals;
-using Italbytz.Ports.Algorithms.AI.Search.GP;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Individuals;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Initialization;
+using Italbytz.AI.Search.GP.Individuals;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.GP.Initialization;
+namespace Italbytz.AI.Search.GP.Initialization;
 
 /// <inheritdoc cref="IInitialization" />
 public class RandomInitialization(IGeneticProgram gp) : IInitialization

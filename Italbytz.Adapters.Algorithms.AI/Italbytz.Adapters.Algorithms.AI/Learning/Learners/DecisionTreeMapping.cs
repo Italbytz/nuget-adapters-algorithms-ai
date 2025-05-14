@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+using Italbytz.AI.Learning.Framework;
 using Italbytz.ML;
-using Italbytz.Ports.Algorithms.AI.Learning;
-using Italbytz.Ports.Algorithms.AI.Learning.ML;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Learners;
+namespace Italbytz.AI.Learning.Learners;
 
 public class DecisionTreeMapping(
     ILearner learner,

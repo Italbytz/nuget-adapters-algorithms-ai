@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Italbytz.Adapters.Algorithms.AI.Util;
+namespace Italbytz.AI.Util;
 
 /**
  * @author Ravi Mohan

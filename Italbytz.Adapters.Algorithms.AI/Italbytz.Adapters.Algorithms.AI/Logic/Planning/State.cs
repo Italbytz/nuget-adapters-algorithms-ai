@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Logic.Fol.Kb.Data;
-using Italbytz.Ports.Algorithms.AI.Logic.Planning;
+using Italbytz.AI.Logic.Fol.Kb.Data;
 
-namespace Italbytz.Adapters.Algorithms.AI.Logic.Planning;
+namespace Italbytz.AI.Logic.Planning;
 
 public class State : IState
 {
     public State(IList<ILiteral> fluents)
     {
         Fluents = fluents;
-        Fluents = Fluents.OrderBy(f => f.ToString()).ToList();
+        Fluents =
+            Fluents.OrderBy(f => f.ToString()).ToList<ILiteral>();
     }
 
-    public State(string fluents) : this(Utils.Parse(fluents))
+    public State(string fluents) : this((IList<ILiteral>)Utils.Parse(fluents))
     {
     }
 
@@ -29,9 +29,10 @@ public class State : IState
 
     public bool IsApplicable(IActionSchema action)
     {
-        return action.Precondition.All(literal => literal.PositiveLiteral
-            ? Fluents.Contains(literal)
-            : !Fluents.Contains(literal.GetComplementaryLiteral()));
+        return action.Precondition.All(literal =>
+            literal.PositiveLiteral
+                ? Fluents.Contains(literal)
+                : !Fluents.Contains(literal.GetComplementaryLiteral()));
     }
 
     private State Result(IActionSchema action)
@@ -44,7 +45,8 @@ public class State : IState
                     result.Add(effect);
                 else
                     result.Remove(effect.GetComplementaryLiteral());
-            return new State(result.OrderBy(f => f.ToString()).ToList());
+            return new State(
+                result.OrderBy(f => f.ToString()).ToList<ILiteral>());
         }
 
         return this;

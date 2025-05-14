@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Italbytz.Adapters.Algorithms.AI.Util.MathUtils.Permute;
+namespace Italbytz.AI.Util.MathUtils.Permute;
 
 public class PermutationGenerator
 {

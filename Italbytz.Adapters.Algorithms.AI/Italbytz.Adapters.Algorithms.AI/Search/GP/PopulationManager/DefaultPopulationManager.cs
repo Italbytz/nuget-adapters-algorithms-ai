@@ -1,8 +1,7 @@
-using Italbytz.Ports.Algorithms.AI.Search.GP.Individuals;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Initialization;
-using Italbytz.Ports.Algorithms.AI.Search.GP.PopulationManager;
+using Italbytz.AI.Search.GP.Individuals;
+using Italbytz.AI.Search.GP.Initialization;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.GP.PopulationManager;
+namespace Italbytz.AI.Search.GP.PopulationManager;
 
 /// <inheritdoc cref="IPopulationManager" />
 public class DefaultPopulationManager : IPopulationManager

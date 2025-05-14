@@ -2,16 +2,18 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Agent;
+using Italbytz.AI.Agent;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.Map;
+namespace Italbytz.AI.Tests.Environment.Map;
 
 public class MoveToAction : DynamicAction
 {
     private const string AttributeMoveToLocation = "location";
 
-    public MoveToAction(string location) : base("moveTo") =>
+    public MoveToAction(string location) : base("moveTo")
+    {
         Attributes[AttributeMoveToLocation] = location;
+    }
 
     public string ToLocation => (string)Attributes[AttributeMoveToLocation];
 }

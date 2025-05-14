@@ -2,10 +2,9 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Search.CSP;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
+using Italbytz.AI.Search.CSP;
 
-namespace Italbytz.Adapters.Algorithms.AI.Tests.Unit.Search.CSP;
+namespace Italbytz.AI.Tests.Unit.Search.CSP;
 
 public class AssignmentTest
 {

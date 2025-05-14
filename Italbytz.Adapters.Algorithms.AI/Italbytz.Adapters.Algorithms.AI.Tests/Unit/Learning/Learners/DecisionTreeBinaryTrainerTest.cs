@@ -1,10 +1,10 @@
-using Italbytz.Adapters.Algorithms.AI.Learning.Learners;
-using Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Learners;
+using Italbytz.AI.Learning.Learners;
+using Italbytz.AI.Tests.Data;
 using Italbytz.ML;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 
-namespace Italbytz.Adapters.Algorithms.AI.Tests.Learning.Learners;
+namespace Italbytz.AI.Tests.Unit.Learning.Learners;
 
 [TestFixture]
 public class DecisionTreeBinaryTrainerTest

@@ -2,10 +2,10 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.Tests.Environment.Map;
-using Italbytz.Ports.Algorithms.AI.Search.Adversarial;
+using Italbytz.AI.Search.Adversarial;
+using Italbytz.AI.Tests.Environment.Map;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.TwoPly;
+namespace Italbytz.AI.Tests.Environment.TwoPly;
 
 public class TwoPlyGame : IGame<TwoPlyGameState, MoveToAction, string>
 {

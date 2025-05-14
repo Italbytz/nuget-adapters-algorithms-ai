@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Learning;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+namespace Italbytz.AI.Learning.Framework;
 
 /// <inheritdoc cref="IDataSet" />
 public class DataSet : IDataSet

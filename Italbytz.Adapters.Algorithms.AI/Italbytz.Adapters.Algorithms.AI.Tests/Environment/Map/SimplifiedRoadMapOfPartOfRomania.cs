@@ -2,7 +2,7 @@
 // MIT License
 // Copyright (c) 2018 aimacode
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.Map;
+namespace Italbytz.AI.Tests.Environment.Map;
 
 /**
  * Represents a simplified road map of Romania. The initialization method is

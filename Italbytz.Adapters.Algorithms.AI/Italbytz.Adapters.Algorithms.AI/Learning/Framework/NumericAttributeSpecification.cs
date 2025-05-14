@@ -1,7 +1,6 @@
 using System;
-using Italbytz.Ports.Algorithms.AI.Learning;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+namespace Italbytz.AI.Learning.Framework;
 
 /// <inheritdoc cref="IAttributeSpecification" />
 public class NumericAttributeSpecification : IAttributeSpecification

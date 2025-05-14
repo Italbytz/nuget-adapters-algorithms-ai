@@ -4,13 +4,12 @@
 
 using System;
 using System.Collections.Generic;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Problem;
-using Italbytz.Ports.Algorithms.AI.Search;
+using Italbytz.AI.Problem;
+using Italbytz.AI.Search.Framework;
+using Italbytz.AI.Util;
 using Microsoft.Extensions.Logging;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Local;
+namespace Italbytz.AI.Search.Local;
 
 public class SimulatedAnnealingSearch<TState, TAction> :
     ISearchForActions<TState, TAction>, ISearchForStates<TState, TAction>

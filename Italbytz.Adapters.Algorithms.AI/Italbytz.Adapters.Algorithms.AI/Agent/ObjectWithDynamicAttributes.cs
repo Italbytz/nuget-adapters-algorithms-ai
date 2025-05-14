@@ -5,34 +5,38 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Italbytz.Adapters.Algorithms.AI.Agent
+namespace Italbytz.AI.Agent;
+
+public abstract class ObjectWithDynamicAttributes
 {
-    public abstract class ObjectWithDynamicAttributes
+    protected Dictionary<object, object> Attributes { get; set; } = new();
+
+    public override string ToString()
     {
-        protected Dictionary<object, object> Attributes { get; set; } = new();
+        return DescribeType() + DescribeAttributes();
+    }
 
-        public override string ToString() =>
-            DescribeType() + DescribeAttributes();
-
-        private string DescribeAttributes()
+    private string DescribeAttributes()
+    {
+        var sb = new StringBuilder();
+        sb.Append("[");
+        var first = true;
+        foreach (var attribute in Attributes)
         {
-            var sb = new StringBuilder();
-            sb.Append("[");
-            var first = true;
-            foreach (var attribute in Attributes)
-            {
-                if (first)
-                    first = false;
-                else
-                    sb.Append(", ");
+            if (first)
+                first = false;
+            else
+                sb.Append(", ");
 
-                sb.Append($"{attribute.Key}={attribute.Value}");
-            }
-
-            sb.Append(']');
-            return sb.ToString();
+            sb.Append($"{attribute.Key}={attribute.Value}");
         }
 
-        private string DescribeType() => GetType().Name;
+        sb.Append(']');
+        return sb.ToString();
+    }
+
+    private string DescribeType()
+    {
+        return GetType().Name;
     }
 }

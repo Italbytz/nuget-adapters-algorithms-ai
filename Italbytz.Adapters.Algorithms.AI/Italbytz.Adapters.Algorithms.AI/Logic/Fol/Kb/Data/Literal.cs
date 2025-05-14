@@ -1,9 +1,8 @@
 using System.Linq;
 using System.Text;
-using Italbytz.Ports.Algorithms.AI.Logic.Fol.Kb.Data;
-using Italbytz.Ports.Algorithms.AI.Logic.Fol.Parsing.Ast;
+using Italbytz.AI.Logic.Fol.Parsing.Ast;
 
-namespace Italbytz.Adapters.Algorithms.AI.Logic.Fol.Kb.Data;
+namespace Italbytz.AI.Logic.Fol.Kb.Data;
 
 public class Literal : ILiteral
 {

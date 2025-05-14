@@ -4,53 +4,54 @@
 
 using System.Collections.Generic;
 using System.Globalization;
-using Italbytz.Ports.Algorithms.AI.Search;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Framework
+namespace Italbytz.AI.Search.Framework;
+
+public class Metrics : IMetrics
 {
-    public class Metrics : IMetrics
+    private readonly Dictionary<string, string> _dict = new();
+
+    public string Get(string name)
     {
-        private readonly Dictionary<string, string> _dict = new();
+        return _dict[name];
+    }
 
-        public string Get(string name) => _dict[name];
-
-        public void Set(string name, int i)
-        {
-            _dict[name] = i.ToString();
-        }
+    public void Set(string name, int i)
+    {
+        _dict[name] = i.ToString();
+    }
 
 
-        public void IncrementInt(string name)
-        {
-            Set(name, GetInt(name) + 1);
-        }
+    public void IncrementInt(string name)
+    {
+        Set(name, GetInt(name) + 1);
+    }
 
-        public int GetInt(string name)
-        {
-            var value = _dict[name];
-            return int.Parse(value);
-        }
+    public int GetInt(string name)
+    {
+        var value = _dict[name];
+        return int.Parse(value);
+    }
 
-        public void Set(string name, double d)
-        {
-            _dict[name] = d.ToString(CultureInfo.InvariantCulture);
-        }
+    public void Set(string name, double d)
+    {
+        _dict[name] = d.ToString(CultureInfo.InvariantCulture);
+    }
 
-        public void Set(string name, long l)
-        {
-            _dict[name] = l.ToString();
-        }
+    public void Set(string name, long l)
+    {
+        _dict[name] = l.ToString();
+    }
 
-        public double GetDouble(string name)
-        {
-            var value = _dict[name];
-            return double.Parse(value);
-        }
+    public double GetDouble(string name)
+    {
+        var value = _dict[name];
+        return double.Parse(value);
+    }
 
-        public long GetLong(string name)
-        {
-            var value = _dict[name];
-            return long.Parse(value);
-        }
+    public long GetLong(string name)
+    {
+        var value = _dict[name];
+        return long.Parse(value);
     }
 }

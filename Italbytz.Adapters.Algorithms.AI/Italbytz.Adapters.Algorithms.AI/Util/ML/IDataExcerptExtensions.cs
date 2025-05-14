@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+using Italbytz.AI.Learning;
+using Italbytz.AI.Learning.Framework;
 using Italbytz.ML;
-using Italbytz.Ports.Algorithms.AI.Learning;
 
-namespace Italbytz.Adapters.Algorithms.AI.Util.ML;
+namespace Italbytz.AI.Util.ML;
 
 /// <summary>
 ///     Extensions for <see cref="IDataExcerpt" />.

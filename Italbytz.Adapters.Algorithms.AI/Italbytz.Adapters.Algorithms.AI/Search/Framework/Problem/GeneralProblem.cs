@@ -4,10 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using Italbytz.Ports.Algorithms.AI.Problem;
-using Italbytz.Ports.Algorithms.AI.Search;
+using Italbytz.AI.Problem;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Framework.Problem;
+namespace Italbytz.AI.Search.Framework.Problem;
 
 /// <inheritdoc cref="IProblem{TState,TAction}" />
 public class GeneralProblem<TState, TAction> : IProblem<TState, TAction>

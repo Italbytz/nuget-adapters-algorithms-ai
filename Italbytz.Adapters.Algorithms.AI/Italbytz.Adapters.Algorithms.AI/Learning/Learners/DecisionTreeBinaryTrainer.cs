@@ -1,9 +1,8 @@
-using Italbytz.Adapters.Algorithms.AI.Util.ML;
+using Italbytz.AI.Util.ML;
 using Italbytz.ML;
-using Italbytz.Ports.Algorithms.AI.Learning;
 using Microsoft.ML;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Learners;
+namespace Italbytz.AI.Learning.Learners;
 
 /// <inheritdoc />
 public class DecisionTreeBinaryTrainer : IEstimator<ITransformer>

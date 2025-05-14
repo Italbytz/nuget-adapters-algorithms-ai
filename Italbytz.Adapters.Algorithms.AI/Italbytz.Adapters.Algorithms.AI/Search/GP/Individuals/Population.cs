@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Individuals;
+using Italbytz.AI.Util;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.GP.Individuals;
+namespace Italbytz.AI.Search.GP.Individuals;
 
 /// <inheritdoc cref="IIndividualList" />
 public class Population : IIndividualList

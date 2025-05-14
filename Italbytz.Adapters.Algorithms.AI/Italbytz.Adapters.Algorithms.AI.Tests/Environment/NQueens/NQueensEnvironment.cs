@@ -2,15 +2,17 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Agent;
-using Italbytz.Adapters.Algorithms.AI.Util.Datastructure;
-using Italbytz.Ports.Algorithms.AI.Agent;
+using Italbytz.AI.Agent;
+using Italbytz.AI.Util.Datastructure;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.NQueens;
+namespace Italbytz.AI.Tests.Environment.NQueens;
 
 public class NQueensEnvironment : AbstractEnvironment<IPercept, QueenAction>
 {
-    public NQueensEnvironment(NQueensBoard board) => Board = board;
+    public NQueensEnvironment(NQueensBoard board)
+    {
+        Board = board;
+    }
 
     public NQueensBoard Board { get; }
 
@@ -33,6 +35,8 @@ public class NQueensEnvironment : AbstractEnvironment<IPercept, QueenAction>
     }
 
     protected override IPercept? GetPerceptSeenBy(
-        IAgent<IPercept, QueenAction> agent) =>
-        null;
+        IAgent<IPercept, QueenAction> agent)
+    {
+        return null;
+    }
 }

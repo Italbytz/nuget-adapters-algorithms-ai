@@ -2,9 +2,9 @@
 // MIT License
 // Copyright (c) 2018 aimacode
 
-using Italbytz.Adapters.Algorithms.AI.Util;
+using Italbytz.AI.Util;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.Map;
+namespace Italbytz.AI.Tests.Environment.Map;
 
 /**
  * Implements a map with locations, distance labeled links between the
@@ -41,7 +41,10 @@ public class ExtendableMap : IMap
     /**
      * Returns a list of all locations.
      */
-    public List<string> GetLocations() => _links.getVertexLabels();
+    public List<string> GetLocations()
+    {
+        return _links.getVertexLabels();
+    }
 
     /**
      * Answers to the question: Where can I get, following one of the
@@ -60,27 +63,36 @@ public class ExtendableMap : IMap
      * {@link #getPossibleNextLocations(String)} as the underlying graph structure
      * cannot be traversed efficiently in reverse order.
      */
-    public List<string> GetPossiblePrevLocations(string location) =>
-        GetPossibleNextLocations(location);
+    public List<string> GetPossiblePrevLocations(string location)
+    {
+        return GetPossibleNextLocations(location);
+    }
 
     /**
      * Returns the travel distance between the two specified locations if they
      * are linked by a connection and null otherwise.
      */
-    public double GetDistance(string fromLocation, string toLocation) =>
-        _links.get(fromLocation, toLocation);
+    public double GetDistance(string fromLocation, string toLocation)
+    {
+        return _links.get(fromLocation, toLocation);
+    }
 
     /**
      * Returns a location which is selected by random.
      */
-    public string RandomlyGenerateDestination() =>
-        Util.SelectRandomlyFromList(GetLocations());
+    public string RandomlyGenerateDestination()
+    {
+        return Util.Util.SelectRandomlyFromList(GetLocations());
+    }
 
     /**
      * Returns the position of the specified location as with respect to an
      * orthogonal coordinate system.
      */
-    public Point2D GetPosition(string loc) => _locationPositions[loc];
+    public Point2D GetPosition(string loc)
+    {
+        return _locationPositions[loc];
+    }
 
     /**
      * Removes everything.
@@ -102,7 +114,10 @@ public class ExtendableMap : IMap
     /**
      * Checks whether the given string is the name of a location.
      */
-    public bool IsLocation(string str) => _links.isVertexLabel(str);
+    public bool IsLocation(string str)
+    {
+        return _links.isVertexLabel(str);
+    }
 
     /**
      * Adds a one-way connection to the map.

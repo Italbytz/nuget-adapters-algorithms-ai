@@ -2,18 +2,16 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-namespace Italbytz.Adapters.Algorithms.AI.Util.Datastructure
+namespace Italbytz.AI.Util.Datastructure;
+
+public class XYLocation
 {
-    public class XYLocation
+    public XYLocation(int x, int y)
     {
-        public int X { get; }
-        public int Y { get; }
-
-        public XYLocation(int x, int y)
-        {
-            X = x;
-            Y = y;
-        } 
+        X = x;
+        Y = y;
     }
-}
 
+    public int X { get; }
+    public int Y { get; }
+}

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver.Inference;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
-using Italbytz.Ports.Algorithms.AI.Search.CSP.Solver.Inference;
+using Italbytz.AI.Search.CSP.Solver.Inference;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
+namespace Italbytz.AI.Search.CSP.Solver;
 
 public class
     FlexibleBacktrackingSolver<TVar, TVal> : AbstractBacktrackingSolver<TVar,

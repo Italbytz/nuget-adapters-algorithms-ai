@@ -1,7 +1,7 @@
-using Italbytz.Adapters.Algorithms.AI.Learning.Inductive;
-using Italbytz.Ports.Algorithms.AI.Learning;
+using Italbytz.AI.Learning;
+using Italbytz.AI.Learning.Inductive;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Learners;
+namespace Italbytz.AI.Tests.Mock.Learning.Learners;
 
 /// <summary>
 ///     This class is created just for the testing of cross validation wrapper.

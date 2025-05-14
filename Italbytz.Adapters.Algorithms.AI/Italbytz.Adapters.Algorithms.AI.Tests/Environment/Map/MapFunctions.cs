@@ -2,9 +2,10 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Ports.Algorithms.AI.Search;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.Map;
+using Italbytz.AI.Search;
+
+namespace Italbytz.AI.Tests.Environment.Map;
 
 public static class MapFunctions
 {
@@ -15,8 +16,10 @@ public static class MapFunctions
             .Select(loc => new MoveToAction(loc)).ToList();
     }
 
-    public static bool TestGoal(string arg) =>
-        arg.Equals(SimplifiedRoadMapOfPartOfRomania.BUCHAREST);
+    public static bool TestGoal(string arg)
+    {
+        return arg.Equals(SimplifiedRoadMapOfPartOfRomania.BUCHAREST);
+    }
 
     public static Func<string, MoveToAction, string, double>
         CreateDistanceStepCostFunction(IMap map)
@@ -30,8 +33,10 @@ public static class MapFunctions
         };
     }
 
-    public static string GetResult(string state, MoveToAction action) =>
-        action.ToLocation;
+    public static string GetResult(string state, MoveToAction action)
+    {
+        return action.ToLocation;
+    }
 
     public static Func<INode<string, MoveToAction>, double>
         CreateSLDHeuristicFunction(string goal, IMap map)

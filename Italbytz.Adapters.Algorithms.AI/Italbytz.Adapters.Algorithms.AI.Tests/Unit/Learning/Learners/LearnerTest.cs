@@ -2,10 +2,10 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Learning.Learners;
-using Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Framework;
+using Italbytz.AI.Learning.Learners;
+using Italbytz.AI.Tests.Unit.Learning.Framework;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Learners;
+namespace Italbytz.AI.Tests.Unit.Learning.Learners;
 
 public class LearnerTest
 {
