@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Search;
-using Italbytz.Ports.Algorithms.AI.Search.Local;
+using Italbytz.AI.Search.Framework;
+using Italbytz.AI.Util;
 using Microsoft.Extensions.Logging;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Local;
+namespace Italbytz.AI.Search.Local;
 
 public interface IProgressTracker<TAlphabet>
 {

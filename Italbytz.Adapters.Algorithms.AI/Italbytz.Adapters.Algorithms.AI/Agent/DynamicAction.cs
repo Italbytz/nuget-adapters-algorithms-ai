@@ -2,9 +2,7 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Ports.Algorithms.AI.Agent;
-
-namespace Italbytz.Adapters.Algorithms.AI.Agent;
+namespace Italbytz.AI.Agent;
 
 /// <inheritdoc cref="IAction" />
 public class DynamicAction : ObjectWithDynamicAttributes, IAction

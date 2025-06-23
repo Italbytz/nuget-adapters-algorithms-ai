@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Italbytz.Adapters.Algorithms.AI.Util;
+namespace Italbytz.AI.Util;
 
 /// <summary>
 ///     Provides thread-safe random number generation for .NET Core.

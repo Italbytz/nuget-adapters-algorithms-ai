@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Italbytz.Adapters.Algorithms.AI.Util;
+namespace Italbytz.AI.Util;
 
 /**
  * @author Ravi Mohan
@@ -87,13 +87,12 @@ public static class Util
     private static double[] Normalize(IReadOnlyList<double> probDist)
     {
         var len = probDist.Count;
-        var total = 0.0;
-        foreach (var d in probDist) total = total + d;
+        var total = probDist.Aggregate(0.0, (current, d) => current + d);
 
         var normalized = new double[len];
-        if (total != 0)
-            for (var i = 0; i < len; i++)
-                normalized[i] = probDist[i] / total;
+        if (total == 0) return normalized;
+        for (var i = 0; i < len; i++)
+            normalized[i] = probDist[i] / total;
         return normalized;
     }
 

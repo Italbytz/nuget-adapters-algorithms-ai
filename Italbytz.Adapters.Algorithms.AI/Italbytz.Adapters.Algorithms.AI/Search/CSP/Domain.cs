@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP;
+namespace Italbytz.AI.Search.CSP;
 
 public class Domain<TVal> : IDomain<TVal>
 {
@@ -53,7 +52,7 @@ public class Domain<TVal> : IDomain<TVal>
         if (obj is null) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != GetType()) return false;
-        return Equals((Domain<TVal>)obj);
+        return Equals((object?)(Domain<TVal>)obj);
     }
 
     public override string ToString()

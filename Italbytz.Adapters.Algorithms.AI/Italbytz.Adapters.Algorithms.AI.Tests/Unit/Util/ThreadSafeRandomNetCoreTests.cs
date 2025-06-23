@@ -1,11 +1,13 @@
-using Italbytz.Adapters.Algorithms.AI.Util;
+using Italbytz.AI.Util;
 
-namespace Italbytz.Adapters.Algorithms.AI.Tests.Unit.Util;
+namespace Italbytz.AI.Tests.Unit.Util;
 
 public class ThreadSafeRandomNetCoreTests
 {
-    private static readonly int[] expected = new[]
-        { 67, 14, 13, 52, 17, 26, 72, 51, 18, 76 };
+    private static readonly int[] expected =
+    [
+        67, 14, 13, 52, 17, 26, 72, 51, 18, 76
+    ];
 
     [Test]
     public void TestThreadSafeRandomFixedSeed()

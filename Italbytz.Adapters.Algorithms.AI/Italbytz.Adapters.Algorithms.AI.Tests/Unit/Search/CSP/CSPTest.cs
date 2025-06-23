@@ -1,8 +1,7 @@
-using Italbytz.Adapters.Algorithms.AI.Search.CSP;
-using Italbytz.Adapters.Algorithms.AI.Search.CSP.Examples;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
+using Italbytz.AI.Search.CSP;
+using Italbytz.AI.Search.CSP.Examples;
 
-namespace Italbytz.Adapters.Algorithms.AI.Tests.Unit.Search.CSP;
+namespace Italbytz.AI.Tests.Unit.Search.CSP;
 
 public class CSPTest
 {

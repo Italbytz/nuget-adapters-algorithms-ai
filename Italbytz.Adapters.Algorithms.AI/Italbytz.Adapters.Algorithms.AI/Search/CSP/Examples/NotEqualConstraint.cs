@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Examples;
+namespace Italbytz.AI.Search.CSP.Examples;
 
 public class NotEqualConstraint<TVar, TVal> : IConstraint<TVar, TVal>
     where TVar : IVariable

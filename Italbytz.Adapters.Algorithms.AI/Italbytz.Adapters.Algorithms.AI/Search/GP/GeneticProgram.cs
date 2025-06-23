@@ -1,19 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Search.GP.Individuals;
-using Italbytz.Ports.Algorithms.AI.Search.GP;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Crossover;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Fitness;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Individuals;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Initialization;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Mutation;
-using Italbytz.Ports.Algorithms.AI.Search.GP.PopulationManager;
-using Italbytz.Ports.Algorithms.AI.Search.GP.SearchSpace;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Selection;
-using Italbytz.Ports.Algorithms.AI.Search.GP.StoppingCriterion;
+using Italbytz.AI.Search.GP.Crossover;
+using Italbytz.AI.Search.GP.Fitness;
+using Italbytz.AI.Search.GP.Individuals;
+using Italbytz.AI.Search.GP.Initialization;
+using Italbytz.AI.Search.GP.Mutation;
+using Italbytz.AI.Search.GP.PopulationManager;
+using Italbytz.AI.Search.GP.SearchSpace;
+using Italbytz.AI.Search.GP.Selection;
+using Italbytz.AI.Search.GP.StoppingCriterion;
 using Microsoft.ML;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.GP;
+namespace Italbytz.AI.Search.GP;
 
 /// <inheritdoc cref="IGeneticProgram" />
 public class GeneticProgram : IGeneticProgram
@@ -34,12 +32,6 @@ public class GeneticProgram : IGeneticProgram
     public required List<ICrossover> Crossovers { get; set; }
 
     /// <inheritdoc />
-    public required IDataView TrainingData { get; set; }
-
-    /// <inheritdoc />
-    public IIndividualList Population => PopulationManager.Population;
-
-    /// <inheritdoc />
     public required IInitialization Initialization { get; set; }
 
     /// <inheritdoc />
@@ -50,6 +42,12 @@ public class GeneticProgram : IGeneticProgram
 
     /// <inheritdoc />
     public required IStoppingCriterion[] StoppingCriteria { get; set; }
+
+    /// <inheritdoc />
+    public required IDataView TrainingData { get; set; }
+
+    /// <inheritdoc />
+    public IIndividualList Population => PopulationManager.Population;
 
     /// <inheritdoc />
     public int Generation { get; set; }

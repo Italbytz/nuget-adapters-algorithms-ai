@@ -2,11 +2,14 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.TwoPly;
+namespace Italbytz.AI.Tests.Environment.TwoPly;
 
 public class TwoPlyGameState
 {
-    public TwoPlyGameState(string location) => Location = location;
+    public TwoPlyGameState(string location)
+    {
+        Location = location;
+    }
 
     public string Location { get; }
 
@@ -18,7 +21,13 @@ public class TwoPlyGameState
         return base.Equals(obj);
     }
 
-    public override int GetHashCode() => Location.GetHashCode();
+    public override int GetHashCode()
+    {
+        return Location.GetHashCode();
+    }
 
-    public override string ToString() => Location;
+    public override string ToString()
+    {
+        return Location;
+    }
 }

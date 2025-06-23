@@ -2,14 +2,13 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Search.Adversarial;
-using Italbytz.Adapters.Algorithms.Tests.Environment.Map;
-using Italbytz.Adapters.Algorithms.Tests.Environment.TwoPly;
-using Italbytz.Ports.Algorithms.AI.Search.Adversarial;
+using Italbytz.AI.Search.Adversarial;
+using Italbytz.AI.Tests.Environment.Map;
+using Italbytz.AI.Tests.Environment.TwoPly;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Search.Adversarial;
+namespace Italbytz.AI.Tests.Unit.Search.Adversarial;
 
 public class AlphaBetaSearchTests
 {
@@ -31,7 +30,7 @@ public class AlphaBetaSearchTests
         _alphaBetaSearch =
             new AlphaBetaSearch<TwoPlyGameState, MoveToAction, string>(_game);
     }
-    
+
     [TearDown]
     public void Cleanup()
     {

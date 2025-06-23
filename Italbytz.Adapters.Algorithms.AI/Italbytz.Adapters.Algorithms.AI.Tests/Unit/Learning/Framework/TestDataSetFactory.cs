@@ -3,11 +3,10 @@
 // Copyright (c) 2015 aima-java contributors
 
 using System.Text;
-using Italbytz.Adapters.Algorithms.AI.Learning.Framework;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Learning;
+using Italbytz.AI.Learning;
+using Italbytz.AI.Learning.Framework;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Framework;
+namespace Italbytz.AI.Tests.Unit.Learning.Framework;
 
 public class TestDataSetFactory
 {
@@ -63,17 +62,17 @@ public class TestDataSetFactory
     private static DataSetSpecification CreateRestaurantDataSetSpec()
     {
         var dss = new DataSetSpecification();
-        dss.DefineStringAttribute("alternate", Util.Yesno());
-        dss.DefineStringAttribute("bar", Util.Yesno());
-        dss.DefineStringAttribute("fri/sat", Util.Yesno());
-        dss.DefineStringAttribute("hungry", Util.Yesno());
+        dss.DefineStringAttribute("alternate", AI.Util.Util.Yesno());
+        dss.DefineStringAttribute("bar", AI.Util.Util.Yesno());
+        dss.DefineStringAttribute("fri/sat", AI.Util.Util.Yesno());
+        dss.DefineStringAttribute("hungry", AI.Util.Util.Yesno());
         dss.DefineStringAttribute("patrons", [
             "None", "Some",
             "Full"
         ]);
         dss.DefineStringAttribute("price", ["$", "$$", "$$$"]);
-        dss.DefineStringAttribute("raining", Util.Yesno());
-        dss.DefineStringAttribute("reservation", Util.Yesno());
+        dss.DefineStringAttribute("raining", AI.Util.Util.Yesno());
+        dss.DefineStringAttribute("reservation", AI.Util.Util.Yesno());
         dss.DefineStringAttribute("type", [
             "French", "Italian",
             "Thai", "Burger"
@@ -82,7 +81,7 @@ public class TestDataSetFactory
             "0-10",
             "10-30", "30-60", ">60"
         ]);
-        dss.DefineStringAttribute("will_wait", Util.Yesno());
+        dss.DefineStringAttribute("will_wait", AI.Util.Util.Yesno());
         return dss;
     }
 }

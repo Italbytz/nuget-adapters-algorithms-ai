@@ -2,16 +2,18 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Util.Datastructure;
-using Italbytz.Ports.Algorithms.AI.Search;
+using Italbytz.AI.Search;
+using Italbytz.AI.Util.Datastructure;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.NQueens;
+namespace Italbytz.AI.Tests.Environment.NQueens;
 
 public static class NQueensFunctions
 {
     public static double GetNumberOfAttackingPairs(
-        INode<NQueensBoard, QueenAction> node) =>
-        node.State.GetNumberOfAttackingPairs();
+        INode<NQueensBoard, QueenAction> node)
+    {
+        return node.State.GetNumberOfAttackingPairs();
+    }
 
     internal static List<QueenAction> GetCSFActions(NQueensBoard state)
     {
@@ -48,7 +50,9 @@ public static class NQueensFunctions
         return result;
     }
 
-    internal static bool TestGoal(NQueensBoard state) =>
-        state.GetNumberOfQueensOnBoard() == state.Size &&
-        state.GetNumberOfAttackingPairs() == 0;
+    internal static bool TestGoal(NQueensBoard state)
+    {
+        return state.GetNumberOfQueensOnBoard() == state.Size &&
+               state.GetNumberOfAttackingPairs() == 0;
+    }
 }

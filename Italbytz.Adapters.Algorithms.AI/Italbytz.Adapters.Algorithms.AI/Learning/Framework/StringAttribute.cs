@@ -1,6 +1,4 @@
-using Italbytz.Ports.Algorithms.AI.Learning;
-
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+namespace Italbytz.AI.Learning.Framework;
 
 /// <inheritdoc cref="IAttribute" />
 public class StringAttribute : IAttribute

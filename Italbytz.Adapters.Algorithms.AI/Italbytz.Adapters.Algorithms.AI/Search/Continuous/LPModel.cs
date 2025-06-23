@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Italbytz.Ports.Algorithms.AI.Search.Continuous;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Continuous;
+namespace Italbytz.AI.Search.Continuous;
 
 public class LPModel : ILPModel
 {

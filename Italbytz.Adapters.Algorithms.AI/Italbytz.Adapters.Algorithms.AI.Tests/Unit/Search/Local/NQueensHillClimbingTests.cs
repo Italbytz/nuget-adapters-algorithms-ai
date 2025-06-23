@@ -1,13 +1,13 @@
-﻿using Italbytz.Adapters.Algorithms.AI.Search.Agent;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework.Problem;
-using Italbytz.Adapters.Algorithms.AI.Search.Local;
-using Italbytz.Adapters.Algorithms.AI.Util.Datastructure;
-using Italbytz.Adapters.Algorithms.Tests.Environment.NQueens;
-using Italbytz.Ports.Algorithms.AI.Agent;
+﻿using Italbytz.AI.Agent;
+using Italbytz.AI.Search.Agent;
+using Italbytz.AI.Search.Framework.Problem;
+using Italbytz.AI.Search.Local;
+using Italbytz.AI.Tests.Environment.NQueens;
+using Italbytz.AI.Util.Datastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Search.Local;
+namespace Italbytz.AI.Tests.Unit.Search.Local;
 
 public class NQueensHillClimbingTests
 {
@@ -27,7 +27,7 @@ public class NQueensHillClimbingTests
     {
         _loggerFactory.Dispose();
     }
-    
+
     [Test]
     public void TestNQueensBoard1()
     {

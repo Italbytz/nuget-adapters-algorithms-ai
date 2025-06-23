@@ -2,9 +2,7 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
-
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP;
+namespace Italbytz.AI.Search.CSP;
 
 public class Variable : IVariable
 {
@@ -22,9 +20,7 @@ public class Variable : IVariable
 
     public override bool Equals(object? obj)
     {
-        if (obj is null) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == GetType() && Equals((Variable)obj);
+        return obj is Variable variable && Equals(variable);
     }
 
     public override int GetHashCode()

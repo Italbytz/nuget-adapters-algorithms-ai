@@ -3,9 +3,9 @@
 // Copyright (c) 2015 aima-java contributors
 
 using System.Text;
-using Italbytz.Adapters.Algorithms.AI.Util.Datastructure;
+using Italbytz.AI.Util.Datastructure;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.NQueens;
+namespace Italbytz.AI.Tests.Environment.NQueens;
 
 public class NQueensBoard
 {
@@ -27,9 +27,15 @@ public class NQueensBoard
             squares[col, row] = false;
     }
 
-    public bool QueenExistsAt(XYLocation l) => QueenExistsAt(l.X, l.Y);
+    public bool QueenExistsAt(XYLocation l)
+    {
+        return QueenExistsAt(l.X, l.Y);
+    }
 
-    private bool QueenExistsAt(int x, int y) => squares[x, y];
+    private bool QueenExistsAt(int x, int y)
+    {
+        return squares[x, y];
+    }
 
     public int GetNumberOfAttackingPairs()
     {

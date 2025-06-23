@@ -1,7 +1,4 @@
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
-using Italbytz.Ports.Algorithms.AI.Search.CSP.Solver.Inference;
-
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver.Inference;
+namespace Italbytz.AI.Search.CSP.Solver.Inference;
 
 public class EmptyInferenceLog<TVar, TVal> : IInferenceLog<TVar, TVal>
     where TVar : IVariable

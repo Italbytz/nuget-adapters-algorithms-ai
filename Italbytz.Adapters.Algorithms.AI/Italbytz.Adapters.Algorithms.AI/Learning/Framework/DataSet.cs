@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Learning;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+namespace Italbytz.AI.Learning.Framework;
 
 /// <inheritdoc cref="IDataSet" />
 public class DataSet : IDataSet
@@ -25,7 +24,7 @@ public class DataSet : IDataSet
         return GetEnumerator();
     }
 
-    public List<IExample> Examples { get; }
+    public List<IExample> Examples { get; set; }
     public IDataSetSpecification Specification { get; set; }
 
     public IEnumerable<string> GetNonTargetAttributes()
@@ -52,8 +51,9 @@ public class DataSet : IDataSet
         foreach (var parameterValue in dict.Keys)
         {
             var reducedDataSetSize = dict[parameterValue].Examples.Count;
-            remainder += reducedDataSetSize / totalSize *
-                         dict[parameterValue].GetInformationFor();
+            var information = dict[parameterValue].GetInformationFor();
+            remainder += (double)reducedDataSetSize / totalSize *
+                         information;
         }
 
         return GetInformationFor() - remainder;

@@ -2,12 +2,11 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Agent;
+using Italbytz.AI.Util;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Italbytz.Adapters.Algorithms.AI.Agent;
+namespace Italbytz.AI.Agent;
 
 /// <inheritdoc cref="IAgent{TPercept,TAction}" />
 public class SimpleAgent<TPercept, TAction> : IAgent<TPercept, TAction>

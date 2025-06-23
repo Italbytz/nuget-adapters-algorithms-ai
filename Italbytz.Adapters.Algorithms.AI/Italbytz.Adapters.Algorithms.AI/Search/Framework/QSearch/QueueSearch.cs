@@ -2,48 +2,46 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Util.Datastructure;
-using Italbytz.Ports.Algorithms.AI.Problem;
-using Italbytz.Ports.Algorithms.AI.Search;
+using Italbytz.AI.Problem;
+using Italbytz.AI.Util.Datastructure;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Framework.QSearch
+namespace Italbytz.AI.Search.Framework.QSearch;
+
+public abstract class QueueSearch<TState, TAction>
 {
-    public abstract class QueueSearch<TState, TAction>
+    public const string MetricNodesExpanded = "nodesExpanded";
+    public const string MetricQueueSize = "queueSize";
+    public const string MetricMaxQueueSize = "maxQueueSize";
+    public const string MetricPathCost = "pathCost";
+
+    protected QueueSearch(NodeFactory<TState, TAction> nodeFactory)
     {
-        public const string MetricNodesExpanded = "nodesExpanded";
-        public const string MetricQueueSize = "queueSize";
-        public const string MetricMaxQueueSize = "maxQueueSize";
-        public const string MetricPathCost = "pathCost";
+        NodeFactory = nodeFactory;
+        NodeFactory.AddNodeListener(_ =>
+            Metrics.IncrementInt(MetricNodesExpanded));
+    }
 
-        protected QueueSearch(NodeFactory<TState, TAction> nodeFactory)
-        {
-            NodeFactory = nodeFactory;
-            NodeFactory.AddNodeListener(_ =>
-                Metrics.IncrementInt(MetricNodesExpanded));
-        }
+    public NodeFactory<TState, TAction> NodeFactory { get; }
+    protected bool EarlyGoalTest => false;
+    public IMetrics Metrics { get; } = new Metrics();
 
-        public NodeFactory<TState, TAction> NodeFactory { get; }
-        protected bool EarlyGoalTest => false;
-        public IMetrics Metrics { get; } = new Metrics();
+    public abstract INode<TState, TAction>? FindNode(
+        IProblem<TState, TAction> problem,
+        NodePriorityQueue<TState, TAction> frontier);
 
-        public abstract INode<TState, TAction>? FindNode(
-            IProblem<TState, TAction> problem,
-            NodePriorityQueue<TState, TAction> frontier);
+    protected void ClearMetrics()
+    {
+        Metrics.Set(MetricNodesExpanded, 0);
+        Metrics.Set(MetricQueueSize, 0);
+        Metrics.Set(MetricMaxQueueSize, 0);
+        Metrics.Set(MetricPathCost, 0);
+    }
 
-        protected void ClearMetrics()
-        {
-            Metrics.Set(MetricNodesExpanded, 0);
-            Metrics.Set(MetricQueueSize, 0);
-            Metrics.Set(MetricMaxQueueSize, 0);
-            Metrics.Set(MetricPathCost, 0);
-        }
-
-        protected void UpdateMetrics(int queueSize)
-        {
-            Metrics.Set(MetricQueueSize, queueSize);
-            var maxQSize = Metrics.GetInt(MetricMaxQueueSize);
-            if (queueSize > maxQSize)
-                Metrics.Set(MetricMaxQueueSize, queueSize);
-        }
+    protected void UpdateMetrics(int queueSize)
+    {
+        Metrics.Set(MetricQueueSize, queueSize);
+        var maxQSize = Metrics.GetInt(MetricMaxQueueSize);
+        if (queueSize > maxQSize)
+            Metrics.Set(MetricMaxQueueSize, queueSize);
     }
 }

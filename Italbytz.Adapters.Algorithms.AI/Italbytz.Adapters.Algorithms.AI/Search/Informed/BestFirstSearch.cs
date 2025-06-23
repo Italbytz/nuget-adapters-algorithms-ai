@@ -3,22 +3,19 @@
 // Copyright (c) 2015 aima-java contributors
 
 using System;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework.QSearch;
-using Italbytz.Ports.Algorithms.AI.Search;
-using Italbytz.Ports.Algorithms.AI.Search.Informed;
+using Italbytz.AI.Search.Framework;
+using Italbytz.AI.Search.Framework.QSearch;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Informed
+namespace Italbytz.AI.Search.Informed;
+
+public class BestFirstSearch<TState, TAction> :
+    QueueBasedSearch<TState, TAction>, IInformed<TState, TAction>
 {
-    public class BestFirstSearch<TState, TAction> :
-        QueueBasedSearch<TState, TAction>, IInformed<TState, TAction>
+    protected BestFirstSearch(QueueSearch<TState, TAction> impl,
+        Func<INode<TState, TAction>, double> evalFn) : base(impl,
+        QueueFactory.CreatePriorityQueue(evalFn))
     {
-        protected BestFirstSearch(QueueSearch<TState, TAction> impl,
-            Func<INode<TState, TAction>, double> evalFn) : base(impl,
-            QueueFactory.CreatePriorityQueue(evalFn))
-        {
-        }
-
-        public Func<INode<TState, TAction>, double>? HeuristicFn { get; set; }
     }
+
+    public Func<INode<TState, TAction>, double>? HeuristicFn { get; set; }
 }

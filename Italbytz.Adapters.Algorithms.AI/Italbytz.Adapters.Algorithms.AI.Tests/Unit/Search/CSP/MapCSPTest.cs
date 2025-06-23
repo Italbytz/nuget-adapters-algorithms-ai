@@ -1,9 +1,8 @@
-using Italbytz.Adapters.Algorithms.AI.Search.CSP;
-using Italbytz.Adapters.Algorithms.AI.Search.CSP.Examples;
-using Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
+using Italbytz.AI.Search.CSP;
+using Italbytz.AI.Search.CSP.Examples;
+using Italbytz.AI.Search.CSP.Solver;
 
-namespace Italbytz.Adapters.Algorithms.AI.Tests.Unit.Search.CSP;
+namespace Italbytz.AI.Tests.Unit.Search.CSP;
 
 public class MapCSPTest
 {

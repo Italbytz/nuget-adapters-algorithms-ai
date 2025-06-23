@@ -1,4 +1,4 @@
-namespace Italbytz.Adapters.Algorithms.AI.Util.MathUtils.Permute;
+namespace Italbytz.AI.Util.MathUtils.Permute;
 
 public class CombinationGenerator
 {

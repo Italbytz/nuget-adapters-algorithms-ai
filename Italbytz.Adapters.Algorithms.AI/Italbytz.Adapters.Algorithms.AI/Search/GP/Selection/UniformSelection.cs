@@ -1,8 +1,6 @@
-using Italbytz.Adapters.Algorithms.AI.Search.GP.Individuals;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Individuals;
-using Italbytz.Ports.Algorithms.AI.Search.GP.Selection;
+using Italbytz.AI.Search.GP.Individuals;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.GP.Selection;
+namespace Italbytz.AI.Search.GP.Selection;
 
 /// <inheritdoc cref="ISelection" />
 public class UniformSelection : ISelection

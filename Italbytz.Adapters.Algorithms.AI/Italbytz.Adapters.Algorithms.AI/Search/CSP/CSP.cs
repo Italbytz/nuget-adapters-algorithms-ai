@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP;
+namespace Italbytz.AI.Search.CSP;
 
 public class CSP<TVar, TVal> : ICSP<TVar, TVal> where TVar : IVariable
 {

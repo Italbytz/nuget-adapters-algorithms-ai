@@ -2,17 +2,17 @@
 // MIT License
 // Copyright (c) 2015 aima-java contributors
 
-using Italbytz.Adapters.Algorithms.AI.Search.Agent;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework.Problem;
-using Italbytz.Adapters.Algorithms.AI.Search.Framework.QSearch;
-using Italbytz.Adapters.Algorithms.AI.Search.Uninformed;
-using Italbytz.Adapters.Algorithms.Tests.Environment.Map;
-using Italbytz.Ports.Algorithms.AI.Agent;
-using Italbytz.Ports.Algorithms.AI.Search;
+using Italbytz.AI.Agent;
+using Italbytz.AI.Search;
+using Italbytz.AI.Search.Agent;
+using Italbytz.AI.Search.Framework.Problem;
+using Italbytz.AI.Search.Framework.QSearch;
+using Italbytz.AI.Search.Uninformed;
+using Italbytz.AI.Tests.Environment.Map;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Search.Uninformed;
+namespace Italbytz.AI.Tests.Unit.Search.Uninformed;
 
 public class UniformCostSearchTests
 {
@@ -34,7 +34,7 @@ public class UniformCostSearchTests
     {
         _loggerFactory.Dispose();
     }
-    
+
     [Test]
     public void TestSimplifiedRoadMapOfRomaniaFromSibiu()
     {

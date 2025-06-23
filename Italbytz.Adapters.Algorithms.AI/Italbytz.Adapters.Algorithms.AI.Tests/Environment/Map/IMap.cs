@@ -2,9 +2,9 @@
 // MIT License
 // Copyright (c) 2018 aimacode
 
-using Italbytz.Adapters.Algorithms.AI.Util;
+using Italbytz.AI.Util;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Environment.Map;
+namespace Italbytz.AI.Tests.Environment.Map;
 
 /**
  * Provides a general interface for maps.
@@ -13,10 +13,10 @@ namespace Italbytz.Adapters.Algorithms.Tests.Environment.Map;
  */
 public interface IMap
 {
-	/**
+    /**
      * Returns a list of all locations.
      */
-	List<string> GetLocations();
+    List<string> GetLocations();
 
     /**
      * Answers to the question: Where can I get, following one of the

@@ -4,55 +4,55 @@
 
 using System;
 using System.Collections.Generic;
-using Italbytz.Ports.Algorithms.AI.Problem;
-using Italbytz.Ports.Algorithms.AI.Search;
+using Italbytz.AI.Problem;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.Framework
+namespace Italbytz.AI.Search.Framework;
+
+public class NodeFactory<TState, TAction> : INodeFactory<TState, TAction>
 {
-    public class NodeFactory<TState, TAction> : INodeFactory<TState, TAction>
+    private readonly List<Action<INode<TState, TAction>>>
+        _listeners = new();
+
+    public bool UseParentLinks { get; set; } = true;
+
+    public void AddNodeListener(Action<INode<TState, TAction>> listener)
     {
-        private readonly List<Action<INode<TState, TAction>>>
-            _listeners = new();
+        _listeners.Add(listener);
+    }
 
-        public bool UseParentLinks { get; set; } = true;
+    public INode<TState, TAction> CreateNode(TState state)
+    {
+        return new Node<TState, TAction>(state);
+    }
 
-        public void AddNodeListener(Action<INode<TState, TAction>> listener)
+    public List<INode<TState, TAction>> GetSuccessors(
+        INode<TState, TAction> node, IProblem<TState, TAction> problem)
+    {
+        var successors = new List<INode<TState, TAction>>();
+
+        foreach (var action in problem.Actions(node.State))
         {
-            _listeners.Add(listener);
+            var successorState = problem.Result(node.State, action);
+            var stepCost =
+                problem.StepCosts(node.State, action, successorState);
+            successors.Add(CreateNode(successorState, node, action,
+                stepCost));
         }
 
-        public INode<TState, TAction> CreateNode(TState state) =>
-            new Node<TState, TAction>(state);
+        NotifyListeners(node);
+        return successors;
+    }
 
-        public List<INode<TState, TAction>> GetSuccessors(
-            INode<TState, TAction> node, IProblem<TState, TAction> problem)
-        {
-            var successors = new List<INode<TState, TAction>>();
+    private INode<TState, TAction> CreateNode(TState state,
+        INode<TState, TAction> parent, TAction action, double stepCost)
+    {
+        var p = UseParentLinks ? parent : null;
+        return new Node<TState, TAction>(state, p, action,
+            parent.PathCost + stepCost);
+    }
 
-            foreach (var action in problem.Actions(node.State))
-            {
-                var successorState = problem.Result(node.State, action);
-                var stepCost =
-                    problem.StepCosts(node.State, action, successorState);
-                successors.Add(CreateNode(successorState, node, action,
-                    stepCost));
-            }
-
-            NotifyListeners(node);
-            return successors;
-        }
-
-        private INode<TState, TAction> CreateNode(TState state,
-            INode<TState, TAction> parent, TAction action, double stepCost)
-        {
-            var p = UseParentLinks ? parent : null;
-            return new Node<TState, TAction>(state, p, action,
-                parent.PathCost + stepCost);
-        }
-
-        private void NotifyListeners(INode<TState, TAction> node)
-        {
-            _listeners.ForEach(listener => listener(node));
-        }
+    private void NotifyListeners(INode<TState, TAction> node)
+    {
+        _listeners.ForEach(listener => listener(node));
     }
 }

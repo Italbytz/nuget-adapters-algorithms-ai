@@ -1,6 +1,4 @@
-using Italbytz.Ports.Algorithms.AI.Search.Continuous;
-
-namespace Italbytz.Adapters.Algorithms.AI.Search.Continuous;
+namespace Italbytz.AI.Search.Continuous;
 
 public class LPConstraint : ILPConstraint
 {

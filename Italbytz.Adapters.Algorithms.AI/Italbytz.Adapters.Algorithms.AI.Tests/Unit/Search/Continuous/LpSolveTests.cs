@@ -1,9 +1,8 @@
-using Italbytz.Adapters.Algorithms.AI.Search.Continuous;
-using Italbytz.Ports.Algorithms.AI.Search.Continuous;
+using Italbytz.AI.Search.Continuous;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Search.Continuous;
+namespace Italbytz.AI.Tests.Unit.Search.Continuous;
 
 public class LpSolveTests
 {
@@ -22,7 +21,7 @@ public class LpSolveTests
                 LoggerFactory.Create(builder => builder.AddConsole());
         _lpsolve = new LPSolver(_loggerFactory);
     }
-    
+
     [TearDown]
     public void Cleanup()
     {

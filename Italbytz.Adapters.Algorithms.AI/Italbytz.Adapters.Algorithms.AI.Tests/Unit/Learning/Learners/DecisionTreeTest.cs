@@ -3,12 +3,11 @@
 // Copyright (c) 2015 aima-java contributors
 
 using System.Text;
-using Italbytz.Adapters.Algorithms.AI.Learning.Inductive;
-using Italbytz.Adapters.Algorithms.AI.Learning.Learners;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Framework;
+using Italbytz.AI.Learning.Inductive;
+using Italbytz.AI.Learning.Learners;
+using Italbytz.AI.Tests.Unit.Learning.Framework;
 
-namespace Italbytz.Adapters.Algorithms.Tests.Unit.Learning.Learners;
+namespace Italbytz.AI.Tests.Unit.Learning.Learners;
 
 public class DecisionTreeTest
 {
@@ -107,10 +106,10 @@ public class DecisionTreeTest
     {
         var ds = TestDataSetFactory.GetRestaurantDataSet();
         var unmatchedValues = new List<string>();
-        unmatchedValues.Add(Util.No);
-        var dt = DecisionTree.GetStumpFor(ds, "alternate", Util.Yes,
-            Util.Yes,
-            unmatchedValues, Util.No);
+        unmatchedValues.Add(AI.Util.Util.No);
+        var dt = DecisionTree.GetStumpFor(ds, "alternate", AI.Util.Util.Yes,
+            AI.Util.Util.Yes,
+            unmatchedValues, AI.Util.Util.No);
         Assert.That(dt, Is.Not.Null);
     }
 
@@ -118,7 +117,7 @@ public class DecisionTreeTest
     public void TestStumpCreationForDataSet()
     {
         var ds = TestDataSetFactory.GetRestaurantDataSet();
-        var dt = DecisionTree.GetStumpsFor(ds, Util.Yes,
+        var dt = DecisionTree.GetStumpsFor(ds, AI.Util.Util.Yes,
             "Unable to classify");
         Assert.That(dt.Count, Is.EqualTo(26));
     }
@@ -127,9 +126,9 @@ public class DecisionTreeTest
     public void TestStumpPredictionForDataSet()
     {
         var ds = TestDataSetFactory.GetRestaurantDataSet();
-        var unmatchedValues = new List<string> { Util.No };
-        var tree = DecisionTree.GetStumpFor(ds, "hungry", Util.Yes,
-            Util.Yes,
+        var unmatchedValues = new List<string> { AI.Util.Util.No };
+        var tree = DecisionTree.GetStumpFor(ds, "hungry", AI.Util.Util.Yes,
+            AI.Util.Util.Yes,
             unmatchedValues, "Unable to Classify");
         var learner = new DecisionTreeLearner(tree, "Unable to Classify");
         var result = learner.Test(ds);
@@ -143,25 +142,25 @@ public class DecisionTreeTest
     private static DecisionTree CreateInducedRestaurantDecisionTree()
     {
         var frisat = new DecisionTree("fri/sat");
-        frisat.AddLeaf(Util.Yes, Util.Yes);
-        frisat.AddLeaf(Util.No, Util.No);
+        frisat.AddLeaf(AI.Util.Util.Yes, AI.Util.Util.Yes);
+        frisat.AddLeaf(AI.Util.Util.No, AI.Util.Util.No);
 
         // type node
         var type = new DecisionTree("type");
-        type.AddLeaf("French", Util.Yes);
-        type.AddLeaf("Italian", Util.No);
+        type.AddLeaf("French", AI.Util.Util.Yes);
+        type.AddLeaf("Italian", AI.Util.Util.No);
         type.AddNode("Thai", frisat);
-        type.AddLeaf("Burger", Util.Yes);
+        type.AddLeaf("Burger", AI.Util.Util.Yes);
 
         // hungry node
         var hungry = new DecisionTree("hungry");
-        hungry.AddLeaf(Util.No, Util.No);
-        hungry.AddNode(Util.Yes, type);
+        hungry.AddLeaf(AI.Util.Util.No, AI.Util.Util.No);
+        hungry.AddNode(AI.Util.Util.Yes, type);
 
         // patrons node
         var patrons = new DecisionTree("patrons");
-        patrons.AddLeaf("None", Util.No);
-        patrons.AddLeaf("Some", Util.Yes);
+        patrons.AddLeaf("None", AI.Util.Util.No);
+        patrons.AddLeaf("Some", AI.Util.Util.Yes);
         patrons.AddNode("Full", hungry);
 
         return patrons;
@@ -171,50 +170,50 @@ public class DecisionTreeTest
     {
         // raining node
         var raining = new DecisionTree("raining");
-        raining.AddLeaf(Util.Yes, Util.Yes);
-        raining.AddLeaf(Util.No, Util.No);
+        raining.AddLeaf(AI.Util.Util.Yes, AI.Util.Util.Yes);
+        raining.AddLeaf(AI.Util.Util.No, AI.Util.Util.No);
 
         // bar node
         var bar = new DecisionTree("bar");
-        bar.AddLeaf(Util.Yes, Util.Yes);
-        bar.AddLeaf(Util.No, Util.No);
+        bar.AddLeaf(AI.Util.Util.Yes, AI.Util.Util.Yes);
+        bar.AddLeaf(AI.Util.Util.No, AI.Util.Util.No);
 
         // friday saturday node
         var frisat = new DecisionTree("fri/sat");
-        frisat.AddLeaf(Util.Yes, Util.Yes);
-        frisat.AddLeaf(Util.No, Util.No);
+        frisat.AddLeaf(AI.Util.Util.Yes, AI.Util.Util.Yes);
+        frisat.AddLeaf(AI.Util.Util.No, AI.Util.Util.No);
 
         // second alternate node to the right of the diagram below hungry
         var alternate2 = new DecisionTree("alternate");
-        alternate2.AddNode(Util.Yes, raining);
-        alternate2.AddLeaf(Util.No, Util.Yes);
+        alternate2.AddNode(AI.Util.Util.Yes, raining);
+        alternate2.AddLeaf(AI.Util.Util.No, AI.Util.Util.Yes);
 
         // reservation node
         var reservation = new DecisionTree("reservation");
-        reservation.AddNode(Util.No, bar);
-        reservation.AddLeaf(Util.Yes, Util.Yes);
+        reservation.AddNode(AI.Util.Util.No, bar);
+        reservation.AddLeaf(AI.Util.Util.Yes, AI.Util.Util.Yes);
 
         // first alternate node to the left of the diagram below waitestimate
         var alternate1 = new DecisionTree("alternate");
-        alternate1.AddNode(Util.No, reservation);
-        alternate1.AddNode(Util.Yes, frisat);
+        alternate1.AddNode(AI.Util.Util.No, reservation);
+        alternate1.AddNode(AI.Util.Util.Yes, frisat);
 
         // hungry node
         var hungry = new DecisionTree("hungry");
-        hungry.AddLeaf(Util.No, Util.Yes);
-        hungry.AddNode(Util.Yes, alternate2);
+        hungry.AddLeaf(AI.Util.Util.No, AI.Util.Util.Yes);
+        hungry.AddNode(AI.Util.Util.Yes, alternate2);
 
         // wait estimate node
         var waitEstimate = new DecisionTree("wait_estimate");
-        waitEstimate.AddLeaf(">60", Util.No);
+        waitEstimate.AddLeaf(">60", AI.Util.Util.No);
         waitEstimate.AddNode("30-60", alternate1);
         waitEstimate.AddNode("10-30", hungry);
-        waitEstimate.AddLeaf("0-10", Util.Yes);
+        waitEstimate.AddLeaf("0-10", AI.Util.Util.Yes);
 
         // patrons node
         var patrons = new DecisionTree("patrons");
-        patrons.AddLeaf("None", Util.No);
-        patrons.AddLeaf("Some", Util.Yes);
+        patrons.AddLeaf("None", AI.Util.Util.No);
+        patrons.AddLeaf("Some", AI.Util.Util.Yes);
         patrons.AddNode("Full", waitEstimate);
 
         return patrons;

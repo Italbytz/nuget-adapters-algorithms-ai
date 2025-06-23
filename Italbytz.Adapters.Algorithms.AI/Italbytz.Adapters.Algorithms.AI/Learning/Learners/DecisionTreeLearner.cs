@@ -1,9 +1,12 @@
+// The original version of this file is part of <see href="https://github.com/aimacode/aima-java"/> which is released under
+// MIT License
+// Copyright (c) 2015 aima-java contributors
+
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Learning.Inductive;
-using Italbytz.Ports.Algorithms.AI.Learning;
+using Italbytz.AI.Learning.Inductive;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Learners;
+namespace Italbytz.AI.Learning.Learners;
 
 public class DecisionTreeLearner : ILearner
 {

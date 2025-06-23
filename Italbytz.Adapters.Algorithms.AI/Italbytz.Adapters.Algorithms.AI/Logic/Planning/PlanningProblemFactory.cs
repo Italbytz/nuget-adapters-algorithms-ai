@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Italbytz.Ports.Algorithms.AI.Logic.Planning;
 
-namespace Italbytz.Adapters.Algorithms.AI.Logic.Planning;
+namespace Italbytz.AI.Logic.Planning;
 
 public class PlanningProblemFactory
 {

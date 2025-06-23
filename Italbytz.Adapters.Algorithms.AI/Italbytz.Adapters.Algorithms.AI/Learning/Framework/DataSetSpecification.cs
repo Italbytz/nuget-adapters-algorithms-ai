@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Ports.Algorithms.AI.Learning;
 
-namespace Italbytz.Adapters.Algorithms.AI.Learning.Framework;
+namespace Italbytz.AI.Learning.Framework;
 
 /// <inheritdoc cref="IDataSetSpecification" />
 public class DataSetSpecification : IDataSetSpecification
@@ -56,6 +55,12 @@ public class DataSetSpecification : IDataSetSpecification
     {
         _attributeSpecifications.Add(new StringAttributeSpecification(name,
             attributeValues));
-        TargetAttribute = name;
+        TargetAttribute = name; // target defaults to last column added
+    }
+
+    public void DefineNumericAttribute(string name)
+    {
+        _attributeSpecifications.Add(new NumericAttributeSpecification(name));
+        TargetAttribute = name; // target defaults to last column added
     }
 }

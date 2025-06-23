@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.Adapters.Algorithms.AI.Util;
-using Italbytz.Ports.Algorithms.AI.Search.CSP;
+using Italbytz.AI.Util;
 
-namespace Italbytz.Adapters.Algorithms.AI.Search.CSP.Solver;
+namespace Italbytz.AI.Search.CSP.Solver;
 
 public class MinConflictsSolver<TVar, TVal> : AbstractCspSolver<TVar, TVal>
     where TVar : IVariable
