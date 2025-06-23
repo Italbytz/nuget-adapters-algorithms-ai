@@ -44,11 +44,15 @@ public class TreeSearch<TState, TAction> : QueueSearch<TState, TAction>
         var root = NodeFactory.CreateNode(problem.InitialState);
         AddToFrontier(frontier, root);
         if (EarlyGoalTest && IsGoal(root, problem)) return root;
+        int ipcost = 0;
         while (!IsFrontierEmpty(frontier))
         {
             var node = RemoveFromFrontier(frontier);
             this.Log(LogLevel.Information,
                 "Testing " + node.State + " with cost " + node.PathCost);
+            ipcost++;
+            this.Log(LogLevel.Information,
+                                     "\n Sum of expanded nodes " +ipcost);
             if (IsGoal(node, problem)) return node;
             var successors = NodeFactory.GetSuccessors(node, problem);
             foreach (var successor in successors)
