@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <Nullable>enable</Nullable>
-        <PackageVersion>9.6.1</PackageVersion>
+        <PackageVersion>9.7.0</PackageVersion>
         <Authors>Robin Nunkesser</Authors>
         <PackageProjectUrl>https://github.com/Italbytz/nuget-adapters-algorithms-ai</PackageProjectUrl>
         <Description>Some algorithm adapters to use with Ports and Adapters.</Description>
