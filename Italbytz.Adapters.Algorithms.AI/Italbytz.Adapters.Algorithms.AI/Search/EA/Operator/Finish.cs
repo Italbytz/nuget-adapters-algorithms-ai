@@ -1,13 +1,17 @@
-using System;
-using Italbytz.AI.Search.GP;
+using System.Threading.Tasks;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.EA.Operator;
 
-public class Finish : IOperator
+public class Finish : GraphOperator
 {
-    public IIndividualList Process(IIndividualList individuals)
+    public override bool NeedsJoin { get; } = true;
+
+//    public Task<IIndividualList> FinalIndividuals { get; set; } = new(null);
+
+    public override Task<IIndividualList> Process(
+        Task<IIndividualList> individuals)
     {
-        throw new NotImplementedException();
+        return individuals;
     }
 }

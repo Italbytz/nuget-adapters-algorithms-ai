@@ -11,7 +11,7 @@ namespace Italbytz.AI.Tests.Unit.Search.EA;
 public class OnePlusOneEATests
 {
     [Test]
-    public void TestOnePlusOneEA()
+    public async Task TestOnePlusOneEA()
     {
         var schedule = new Schedule
         {
@@ -24,6 +24,6 @@ public class OnePlusOneEATests
         [
             new GenerationStoppingCriterion(schedule)
         ];
-        schedule.Run();
+        await schedule.Run();
     }
 }

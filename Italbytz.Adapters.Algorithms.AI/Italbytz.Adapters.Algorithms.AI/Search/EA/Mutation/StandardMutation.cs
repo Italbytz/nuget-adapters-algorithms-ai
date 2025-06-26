@@ -1,13 +1,18 @@
-using System;
+using System.Threading.Tasks;
+using Italbytz.AI.Search.EA.Operator;
 using Italbytz.AI.Search.GP.Individuals;
-using Italbytz.AI.Search.GP.Mutation;
 
 namespace Italbytz.AI.Search.EA.Mutation;
 
-public class StandardMutation : IMutation
+public class StandardMutation : GraphOperator
 {
-    public IIndividualList Process(IIndividualList individuals)
+    public override Task<IIndividualList> Process(
+        Task<IIndividualList> individuals)
     {
-        throw new NotImplementedException();
+        var individualList = individuals.Result;
+        // ToDo: Implement mutation logic here
+        Task<IIndividualList> result = null;
+        foreach (var child in Children) result = child.Process(individuals);
+        return result;
     }
 }

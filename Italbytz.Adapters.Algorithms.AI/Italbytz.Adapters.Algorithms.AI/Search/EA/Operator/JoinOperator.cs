@@ -1,13 +1,29 @@
-using System;
-using Italbytz.AI.Search.GP;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.EA.Operator;
 
-public class JoinOperator : IOperator
+public abstract class JoinOperator : GraphOperator
 {
-    public IIndividualList Process(IIndividualList individuals)
+    public override async Task<IIndividualList> Process(
+        Task<IIndividualList> individuals)
     {
-        throw new NotImplementedException();
+        List<Task<IIndividualList>> processes = [];
+        processes.AddRange(
+            Parents.Select(parent => parent.Process(individuals)));
+        await Task.WhenAll(processes);
+        return null;
     }
+
+    /*public override void Check()
+    {
+        if (Children.Count > 1)
+            throw new InvalidOperationException(
+                "JoinOperator cannot have more than one child.");
+        if (Parents.Count < 1)
+            throw new InvalidOperationException(
+                "JoinOperator must at least have one parent.");
+    }*/
 }

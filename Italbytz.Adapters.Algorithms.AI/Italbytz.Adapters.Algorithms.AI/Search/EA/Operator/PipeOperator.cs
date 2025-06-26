@@ -1,13 +1,14 @@
-using System;
-using Italbytz.AI.Search.GP;
-using Italbytz.AI.Search.GP.Individuals;
-
 namespace Italbytz.AI.Search.EA.Operator;
 
-public class PipeOperator : IOperator
+public abstract class PipeOperator : GraphOperator
 {
-    public IIndividualList Process(IIndividualList individuals)
+    /*public override void Check()
     {
-        throw new NotImplementedException();
-    }
+        if (Children.Count > 1)
+            throw new InvalidOperationException(
+                "PipeOperator cannot have more than one child.");
+        if (Parents.Count < 1)
+            throw new InvalidOperationException(
+                "PipeOperator must at least have one parent.");
+    }*/
 }

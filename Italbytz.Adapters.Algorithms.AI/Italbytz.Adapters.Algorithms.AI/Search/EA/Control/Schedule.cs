@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Italbytz.AI.Search.EA.Graph;
 using Italbytz.AI.Search.GP.Fitness;
 using Italbytz.AI.Search.GP.Individuals;
@@ -25,8 +26,9 @@ public class Schedule
     public int Generation { get; set; }
     public required OperatorGraph AlgorithmGraph { get; set; }
 
-    public void Run()
+    public async Task Run()
     {
+        AlgorithmGraph.Check();
         Generation = 0;
         PopulationManager.InitPopulation(Initialization);
         var stop = false;
@@ -36,7 +38,7 @@ public class Schedule
                 .GetPopulationInfo());
             stop = StoppingCriteria.Any(sc => sc.IsMet());
             if (stop) continue;
-            var newPopulation = AlgorithmGraph.Process(Population);
+            var newPopulation = await AlgorithmGraph.Process(Population);
             Generation++;
             PopulationManager.Population = newPopulation;
         }
