@@ -7,11 +7,16 @@ namespace Italbytz.AI.Search.GP.PopulationManager;
 public class DefaultPopulationManager : IPopulationManager
 {
     /// <inheritdoc />
-    public required IIndividualList Population { get; set; }
+    public IIndividualList? Population { get; set; }
 
     /// <inheritdoc />
     public void InitPopulation(IInitialization initialization)
     {
         Population = initialization.Process(null);
+    }
+
+    public string GetPopulationInfo()
+    {
+        return Population?.ToString() ?? "Population not initialized.";
     }
 }
