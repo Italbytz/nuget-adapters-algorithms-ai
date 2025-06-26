@@ -6,8 +6,8 @@ namespace Italbytz.AI.Search.EA.Operator;
 
 public interface IGraphOperator
 {
-    public bool MaySplit { get; }
-    public bool NeedsJoin { get; }
+    public int MaxParents { get; }
+    public int MaxChildren { get; }
     public List<IGraphOperator> Children { get; }
     public List<IGraphOperator> Parents { get; }
 

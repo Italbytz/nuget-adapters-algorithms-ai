@@ -7,7 +7,7 @@ namespace Italbytz.AI.Search.EA.Operator.Selection;
 public class CutSelection : GraphOperator
 {
     public List<Task<IIndividualList>> ParentTasks = [];
-    public override bool NeedsJoin { get; }
+    public override int MaxParents { get; } = int.MaxValue;
 
     public override Task<IIndividualList> Process(
         Task<IIndividualList> individuals)

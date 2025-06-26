@@ -5,9 +5,8 @@ namespace Italbytz.AI.Search.EA.Operator;
 
 public class Finish : GraphOperator
 {
-    public override bool NeedsJoin { get; } = true;
+    public override int MaxChildren { get; } = 0;
 
-//    public Task<IIndividualList> FinalIndividuals { get; set; } = new(null);
 
     public override Task<IIndividualList> Process(
         Task<IIndividualList> individuals)

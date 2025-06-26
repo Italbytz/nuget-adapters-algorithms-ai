@@ -5,7 +5,8 @@ namespace Italbytz.AI.Search.EA.Operator;
 
 public class Start : GraphOperator
 {
-    public override bool MaySplit { get; } = true;
+    public override int MaxParents { get; } = 0;
+
 
     public override Task<IIndividualList> Process(
         Task<IIndividualList> individuals)
