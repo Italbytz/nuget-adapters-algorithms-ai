@@ -8,22 +8,22 @@ using GenerationStoppingCriterion =
 
 namespace Italbytz.AI.Tests.Unit.Search.EA;
 
-public class OnePlusOneEATests
+public class OnePlusOneEaGraphTests
 {
     [Test]
     public async Task TestOnePlusOneEA()
     {
-        var schedule = new Schedule
+        var onePlusOneEA = new EvolutionaryAlgorithm
         {
             FitnessFunction = new OneMax(),
             SearchSpace = new BitString(),
-            AlgorithmGraph = new OnePlusOneEA()
+            AlgorithmGraph = new OnePlusOneEAGraph()
         };
-        schedule.Initialization = new RandomInitialization(schedule);
-        schedule.StoppingCriteria =
+        onePlusOneEA.Initialization = new RandomInitialization(onePlusOneEA);
+        onePlusOneEA.StoppingCriteria =
         [
-            new GenerationStoppingCriterion(schedule)
+            new GenerationStoppingCriterion(onePlusOneEA)
         ];
-        await schedule.Run();
+        await onePlusOneEA.Run();
     }
 }

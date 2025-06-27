@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Italbytz.AI.Search.GP.Fitness;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.EA.Operator;
 
 public abstract class GraphOperator : IGraphOperator
 {
+    private readonly List<Task<IIndividualList>> ParentTasks = [];
     public virtual int MaxParents { get; } = 1;
     public virtual int MaxChildren { get; } = 1;
-
-    public abstract Task<IIndividualList> Process(
-        Task<IIndividualList> individuals);
 
     public List<IGraphOperator> Children { get; } = [];
     public List<IGraphOperator> Parents { get; } = [];
@@ -33,5 +33,40 @@ public abstract class GraphOperator : IGraphOperator
         if (Parents.Count > MaxParents)
             throw new InvalidOperationException(
                 $"Operator cannot have more than {MaxParents} parents.");
+    }
+
+    public Task<IIndividualList>? Process(Task<IIndividualList> individuals,
+        IFitnessFunction fitnessFunction)
+    {
+        if (Parents.Count > 1)
+        {
+            ParentTasks.Add(individuals);
+            if (ParentTasks.Count < Parents.Count) return null;
+            Task.WhenAll(ParentTasks).Wait();
+            // Combine the results from all parents into a single list.
+            var combinedIndividuals = new Population();
+            foreach (var individual in ParentTasks
+                         .Select(parentTask => parentTask.Result)
+                         .SelectMany(parentIndividuals => parentIndividuals))
+                combinedIndividuals.Add(individual);
+            individuals = Task.FromResult<IIndividualList>(combinedIndividuals);
+        }
+
+        // This method is called to process the individuals through the operator.
+        var operationResult = Operate(individuals, fitnessFunction);
+        // After the operation, we process the result through the children.
+        // If there are no children, we return the result directly.
+        if (Children.Count == 0)
+            return operationResult;
+        Task<IIndividualList>? returnValue = null;
+        foreach (var child in Children)
+            returnValue = child.Process(operationResult, fitnessFunction);
+        return returnValue;
+    }
+
+    public virtual Task<IIndividualList> Operate(
+        Task<IIndividualList> individuals, IFitnessFunction fitnessFunction)
+    {
+        return individuals;
     }
 }

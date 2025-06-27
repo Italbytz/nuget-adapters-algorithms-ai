@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Italbytz.AI.Search.GP.Fitness;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.EA.Operator;
@@ -15,5 +16,6 @@ public interface IGraphOperator
 
     public void AddChildren(params IGraphOperator[] children);
 
-    public Task<IIndividualList> Process(Task<IIndividualList> individuals);
+    public Task<IIndividualList>? Process(Task<IIndividualList> individuals,
+        IFitnessFunction fitnessFunction);
 }

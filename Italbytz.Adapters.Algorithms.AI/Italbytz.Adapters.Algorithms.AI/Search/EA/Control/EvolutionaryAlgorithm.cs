@@ -11,7 +11,7 @@ using Italbytz.AI.Search.GP.StoppingCriterion;
 
 namespace Italbytz.AI.Search.EA.Control;
 
-public class Schedule
+public class EvolutionaryAlgorithm
 {
     public required IFitnessFunction FitnessFunction { get; set; }
     public required ISearchSpace SearchSpace { get; set; }
@@ -29,6 +29,7 @@ public class Schedule
     public async Task Run()
     {
         AlgorithmGraph.Check();
+        AlgorithmGraph.FitnessFunction = FitnessFunction;
         Generation = 0;
         PopulationManager.InitPopulation(Initialization);
         var stop = false;
@@ -40,6 +41,8 @@ public class Schedule
             if (stop) continue;
             var newPopulation = await AlgorithmGraph.Process(Population);
             Generation++;
+            foreach (var individual in newPopulation)
+                individual.Generation = Generation;
             PopulationManager.Population = newPopulation;
         }
     }

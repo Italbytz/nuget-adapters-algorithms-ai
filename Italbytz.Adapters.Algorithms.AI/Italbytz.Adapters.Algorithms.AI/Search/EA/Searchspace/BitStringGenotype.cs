@@ -7,7 +7,7 @@ namespace Italbytz.AI.Search.EA.Searchspace;
 
 public class BitStringGenotype : IGenotype
 {
-    private int _dimension;
+    private readonly int _dimension;
 
     public BitStringGenotype(BitArray bs, int dimension)
     {
@@ -19,7 +19,7 @@ public class BitStringGenotype : IGenotype
 
     public object Clone()
     {
-        throw new NotImplementedException();
+        return new BitStringGenotype(BitArray, _dimension);
     }
 
     public void UpdatePredictions()

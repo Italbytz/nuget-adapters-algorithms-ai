@@ -1,24 +1,30 @@
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Italbytz.AI.Search.GP.Fitness;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.EA.Operator.Selection;
 
 public class CutSelection : GraphOperator
 {
-    public List<Task<IIndividualList>> ParentTasks = [];
     public override int MaxParents { get; } = int.MaxValue;
+    public int NoOfIndividualsToSelect { get; } = 1;
 
-    public override Task<IIndividualList> Process(
-        Task<IIndividualList> individuals)
+    public override Task<IIndividualList> Operate(
+        Task<IIndividualList> individuals, IFitnessFunction fitnessFunction)
     {
-        ParentTasks.Add(individuals);
-        if (ParentTasks.Count < Parents.Count) return null;
-        Task.WhenAll(ParentTasks).Wait();
-        var individualList = ParentTasks[0].Result;
-        // ToDo
-        Task<IIndividualList> result = null;
-        foreach (var child in Children) result = child.Process(individuals);
-        return result;
+        var individualList = individuals.Result;
+        var newPopulation = new Population();
+        // Update LatestKnownFitness
+        foreach (var individual in individualList)
+            individual.LatestKnownFitness ??=
+                fitnessFunction.Evaluate(individual, null);
+        // Take the NoOfIndividualsToSelect best individuals according to LatestKnownFitness from individualList
+        var bestIndividuals = individualList
+            .OrderByDescending(i => i.LatestKnownFitness.Sum())
+            .Take(NoOfIndividualsToSelect);
+        foreach (var individual in bestIndividuals)
+            newPopulation.Add(individual);
+        return Task.FromResult<IIndividualList>(newPopulation);
     }
 }

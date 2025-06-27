@@ -4,7 +4,7 @@ using Italbytz.AI.Search.GP.StoppingCriterion;
 namespace Italbytz.AI.Search.EA.StoppingCriterion;
 
 /// <inheritdoc cref="IStoppingCriterion" />
-public class GenerationStoppingCriterion(Schedule schedule)
+public class GenerationStoppingCriterion(EvolutionaryAlgorithm schedule)
     : IStoppingCriterion
 {
     public int Limit { get; set; } = 100;
