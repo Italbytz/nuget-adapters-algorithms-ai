@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using Italbytz.AI.Search.GP.Individuals;
-using Italbytz.AI.Search.GP.SearchSpace;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.SearchSpace;
 using Italbytz.AI.Util;
 
 namespace Italbytz.AI.Search.EA.Searchspace;

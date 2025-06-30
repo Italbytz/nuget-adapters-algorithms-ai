@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Italbytz.AI.Search.GP.Fitness;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.EA.Operator.Selection;

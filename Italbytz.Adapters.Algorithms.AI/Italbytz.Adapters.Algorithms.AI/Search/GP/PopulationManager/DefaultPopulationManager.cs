@@ -1,5 +1,6 @@
-using Italbytz.AI.Search.GP.Individuals;
-using Italbytz.AI.Search.GP.Initialization;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.Initialization;
+using Italbytz.AI.Search.EA.PopulationManager;
 
 namespace Italbytz.AI.Search.GP.PopulationManager;
 
@@ -12,7 +13,7 @@ public class DefaultPopulationManager : IPopulationManager
     /// <inheritdoc />
     public void InitPopulation(IInitialization initialization)
     {
-        Population = initialization.Process(null);
+        Population = initialization.Process(null, null).Result;
     }
 
     public string GetPopulationInfo()

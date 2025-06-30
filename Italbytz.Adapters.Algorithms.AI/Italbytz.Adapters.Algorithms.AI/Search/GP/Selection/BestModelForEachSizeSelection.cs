@@ -1,5 +1,9 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.Selection;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.GP.Selection;
@@ -8,10 +12,14 @@ namespace Italbytz.AI.Search.GP.Selection;
 public class BestModelForEachSizeSelection : ISelection
 {
     /// <inheritdoc />
-    public IIndividualList Process(IIndividualList individuals)
+    public int Size { get; set; }
+
+    /// <inheritdoc />
+    public Task<IIndividualList>? Process(Task<IIndividualList> individuals,
+        IFitnessFunction fitnessFunction)
     {
         var population = new Population();
-        var individualList = individuals.ToList();
+        var individualList = individuals.Result.ToList();
 
         var groupedIndividuals =
             individualList.GroupBy(individual => individual.Size);
@@ -32,9 +40,6 @@ public class BestModelForEachSizeSelection : ISelection
             population.Add(bestIndividual);
         }
 
-        return population;
+        return Task.FromResult<IIndividualList>(population);
     }
-
-    /// <inheritdoc />
-    public int Size { get; set; }
 }

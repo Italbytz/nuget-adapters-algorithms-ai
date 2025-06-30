@@ -1,3 +1,6 @@
+using Italbytz.AI.Search.EA;
+using Italbytz.AI.Search.EA.StoppingCriterion;
+
 namespace Italbytz.AI.Search.GP.StoppingCriterion;
 
 /// <inheritdoc cref="IStoppingCriterion" />

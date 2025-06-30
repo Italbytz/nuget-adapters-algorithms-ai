@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Italbytz.AI.Search.GP.Fitness;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.EA.Operator;
@@ -59,8 +60,12 @@ public abstract class GraphOperator : IGraphOperator
         if (Children.Count == 0)
             return operationResult;
         Task<IIndividualList>? returnValue = null;
-        foreach (var child in Children)
-            returnValue = child.Process(operationResult, fitnessFunction);
+        foreach (var childReturnValue in Children
+                     .Select(child =>
+                         child.Process(operationResult, fitnessFunction))
+                     .OfType<Task<IIndividualList>>())
+            returnValue = childReturnValue;
+
         return returnValue;
     }
 

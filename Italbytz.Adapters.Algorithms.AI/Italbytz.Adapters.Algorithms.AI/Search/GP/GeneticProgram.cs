@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using Italbytz.AI.Search.GP.Crossover;
-using Italbytz.AI.Search.GP.Fitness;
+using System.Threading.Tasks;
+using Italbytz.AI.Search.EA;
+using Italbytz.AI.Search.EA.Crossover;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.Initialization;
+using Italbytz.AI.Search.EA.Mutation;
+using Italbytz.AI.Search.EA.PopulationManager;
+using Italbytz.AI.Search.EA.SearchSpace;
+using Italbytz.AI.Search.EA.Selection;
+using Italbytz.AI.Search.EA.StoppingCriterion;
 using Italbytz.AI.Search.GP.Individuals;
-using Italbytz.AI.Search.GP.Initialization;
-using Italbytz.AI.Search.GP.Mutation;
-using Italbytz.AI.Search.GP.PopulationManager;
-using Italbytz.AI.Search.GP.SearchSpace;
-using Italbytz.AI.Search.GP.Selection;
-using Italbytz.AI.Search.GP.StoppingCriterion;
 using Microsoft.ML;
 
 namespace Italbytz.AI.Search.GP;
@@ -72,8 +75,10 @@ public class GeneticProgram : IGeneticProgram
             foreach (var crossover in Crossovers)
             {
                 SelectionForOperator.Size = 2;
-                var selected = SelectionForOperator.Process(Population);
-                var children = crossover.Process(selected);
+                var selected = SelectionForOperator
+                    .Process(Task.FromResult(Population), null).Result;
+                var children = crossover
+                    .Process(Task.FromResult(selected), null).Result;
                 foreach (var child in children)
                     newPopulation.Add(child);
             }
@@ -81,9 +86,10 @@ public class GeneticProgram : IGeneticProgram
             foreach (var mutation in Mutations)
             {
                 SelectionForOperator.Size = 1;
-                var selected = SelectionForOperator.Process(Population);
-                var mutated = mutation.Process(selected);
-                foreach (var mutant in mutated)
+                var selected = SelectionForOperator.Process(
+                    Task.FromResult(Population), null);
+                var mutated = mutation.Process(selected, null);
+                foreach (var mutant in mutated.Result)
                     newPopulation.Add(mutant);
             }
 
@@ -96,8 +102,9 @@ public class GeneticProgram : IGeneticProgram
 
             UpdatePopulationFitness();
 
-            var newGeneration = SelectionForSurvival.Process(Population);
-            PopulationManager.Population = newGeneration;
+            var newGeneration =
+                SelectionForSurvival.Process(Task.FromResult(Population), null);
+            PopulationManager.Population = newGeneration.Result;
         }
 
         return PopulationManager.Population;

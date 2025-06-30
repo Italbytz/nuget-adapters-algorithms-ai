@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Italbytz.AI.Search.EA.Individuals;
 using Italbytz.AI.Util;
 
 namespace Italbytz.AI.Search.GP.Individuals;

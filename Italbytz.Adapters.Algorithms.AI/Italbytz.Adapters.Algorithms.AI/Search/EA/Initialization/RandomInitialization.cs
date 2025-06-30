@@ -1,14 +1,18 @@
+using System.Threading.Tasks;
 using Italbytz.AI.Search.EA.Control;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
 using Italbytz.AI.Search.GP.Individuals;
-using Italbytz.AI.Search.GP.Initialization;
 
 namespace Italbytz.AI.Search.EA.Initialization;
 
-public class RandomInitialization(EvolutionaryAlgorithm schedule) : IInitialization
+public class RandomInitialization(EvolutionaryAlgorithm schedule)
+    : IInitialization
 {
     public int Size { get; set; } = 1;
 
-    public IIndividualList Process(IIndividualList individuals)
+    public Task<IIndividualList>? Process(Task<IIndividualList> individuals,
+        IFitnessFunction fitnessFunction)
     {
         var result = new Population();
         var searchSpace = schedule.SearchSpace;
@@ -16,6 +20,6 @@ public class RandomInitialization(EvolutionaryAlgorithm schedule) : IInitializat
             result
                 .Add(new Individual(searchSpace.GetRandomGenotype(),
                     null));
-        return result;
+        return Task.FromResult<IIndividualList>(result);
     }
 }

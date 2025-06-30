@@ -1,4 +1,8 @@
-using Italbytz.AI.Search.GP.Individuals;
+using System.Threading.Tasks;
+using Italbytz.AI.Search.EA;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.Initialization;
 
 namespace Italbytz.AI.Search.GP.Initialization;
 
@@ -8,10 +12,11 @@ public class CompleteInitialization(IGeneticProgram gp) : IInitialization
     public int Size { get; set; }
 
     /// <inheritdoc />
-    public IIndividualList Process(IIndividualList individuals)
+    public Task<IIndividualList>? Process(Task<IIndividualList> individuals,
+        IFitnessFunction fitnessFunction)
     {
         var searchSpace = gp.SearchSpace;
         var population = searchSpace.GetAStartingPopulation();
-        return population;
+        return Task.FromResult(population);
     }
 }

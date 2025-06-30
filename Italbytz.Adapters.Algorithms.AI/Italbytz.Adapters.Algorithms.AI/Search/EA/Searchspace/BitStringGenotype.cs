@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
-using Italbytz.AI.Search.GP.Individuals;
+using Italbytz.AI.Search.EA.Individuals;
 
 namespace Italbytz.AI.Search.EA.Searchspace;
 

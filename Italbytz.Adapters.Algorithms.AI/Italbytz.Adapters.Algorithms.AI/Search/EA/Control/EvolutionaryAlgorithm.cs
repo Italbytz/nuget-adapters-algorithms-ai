@@ -1,13 +1,14 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Italbytz.AI.Search.EA.Fitness;
 using Italbytz.AI.Search.EA.Graph;
-using Italbytz.AI.Search.GP.Fitness;
-using Italbytz.AI.Search.GP.Individuals;
-using Italbytz.AI.Search.GP.Initialization;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.Initialization;
+using Italbytz.AI.Search.EA.PopulationManager;
+using Italbytz.AI.Search.EA.SearchSpace;
+using Italbytz.AI.Search.EA.StoppingCriterion;
 using Italbytz.AI.Search.GP.PopulationManager;
-using Italbytz.AI.Search.GP.SearchSpace;
-using Italbytz.AI.Search.GP.StoppingCriterion;
 
 namespace Italbytz.AI.Search.EA.Control;
 

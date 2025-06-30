@@ -1,4 +1,8 @@
 using System.Linq;
+using System.Threading.Tasks;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.Selection;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.GP.Selection;
@@ -6,10 +10,13 @@ namespace Italbytz.AI.Search.GP.Selection;
 /// <inheritdoc cref="ISelection" />
 public class ParetoFrontSelection : ISelection
 {
+    public int Size { get; set; }
+
     /// <inheritdoc />
-    public IIndividualList Process(IIndividualList individuals)
+    public Task<IIndividualList>? Process(Task<IIndividualList> individuals,
+        IFitnessFunction fitnessFunction)
     {
-        var individualList = individuals.ToList();
+        var individualList = individuals.Result.ToList();
         var maxGeneration =
             individualList.Max(individual => individual.Generation);
         var i = 0;
@@ -42,8 +49,6 @@ public class ParetoFrontSelection : ISelection
 
         var population = new Population();
         foreach (var individual in individualList) population.Add(individual);
-        return population;
+        return Task.FromResult<IIndividualList>(population);
     }
-
-    public int Size { get; set; }
 }

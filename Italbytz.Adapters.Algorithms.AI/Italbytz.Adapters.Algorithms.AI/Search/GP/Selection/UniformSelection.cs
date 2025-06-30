@@ -1,3 +1,7 @@
+using System.Threading.Tasks;
+using Italbytz.AI.Search.EA.Fitness;
+using Italbytz.AI.Search.EA.Individuals;
+using Italbytz.AI.Search.EA.Selection;
 using Italbytz.AI.Search.GP.Individuals;
 
 namespace Italbytz.AI.Search.GP.Selection;
@@ -9,12 +13,13 @@ public class UniformSelection : ISelection
     public int Size { get; set; }
 
     /// <inheritdoc />
-    public IIndividualList Process(IIndividualList individuals)
+    public Task<IIndividualList>? Process(Task<IIndividualList> individuals,
+        IFitnessFunction fitnessFunction)
     {
         var result = new Population();
-        var population = individuals;
+        var population = individuals.Result;
         for (var i = 0; i < Size; i++)
             result.Add(population.GetRandomIndividual());
-        return result;
+        return Task.FromResult<IIndividualList>(result);
     }
 }

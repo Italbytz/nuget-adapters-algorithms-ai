@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Italbytz.AI.Search.EA.Individuals;
 
 namespace Italbytz.AI.Search.GP.Individuals;
 
