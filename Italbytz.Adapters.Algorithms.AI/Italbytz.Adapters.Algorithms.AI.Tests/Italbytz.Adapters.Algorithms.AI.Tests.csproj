@@ -25,4 +25,8 @@
         <ProjectReference Include="..\Italbytz.Adapters.Algorithms.AI\Italbytz.Adapters.Algorithms.AI.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Unit\Search\EA\"/>
+    </ItemGroup>
+
 </Project>
