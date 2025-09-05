@@ -1,6 +1,4 @@
-using Italbytz.AI.Util;
-
-namespace Italbytz.AI.Tests.Unit.Util;
+namespace Italbytz.AI.Tests;
 
 public class ThreadSafeRandomNetCoreTests
 {

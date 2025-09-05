@@ -4,8 +4,9 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+using Italbytz.AI.Search;
 
-namespace Italbytz.AI.Search.Framework;
+namespace Italbytz.AI;
 
 public class Metrics : IMetrics
 {
