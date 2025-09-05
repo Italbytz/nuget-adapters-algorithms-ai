@@ -6,6 +6,5 @@ This repository provides C# adapters for Artificial Intelligence projects. The N
 
 This repository only contains the shared code of these subprojects:
 
-- [Italbytz.Adapters.Algorithms.ML](https://github.com/Italbytz/nuget-adapters-algorithms-ml) for extensions to Microsoft's [ML.NET](https://dot.net/ml)
 - [Italbytz.Adapters.Algorithms.AIMA](https://github.com/Italbytz/nuget-adapters-algorithms-aima) for many of the algorithms in [Russell](http://www.cs.berkeley.edu/~russell/) and [Norvig's](http://www.norvig.com/) [Artificial Intelligence - A Modern Approach](http://aima.cs.berkeley.edu/)(AIMA)
 - [Italbytz.Adapters.Algorithms.EA](https://github.com/Italbytz/nuget-adapters-algorithms-ea) for Evolutionary Algorithms inspired by [FrEAK](https://sourceforge.net/projects/freak427/)
