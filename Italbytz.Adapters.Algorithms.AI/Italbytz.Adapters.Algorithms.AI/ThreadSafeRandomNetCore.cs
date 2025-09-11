@@ -12,10 +12,12 @@ public class ThreadSafeRandomNetCore : Random
     private static int? _seed;
     [ThreadStatic] private static Random? _tRandom;
 
+    /*
     private long
         _consecutiveZeros; // Track consecutive zeros to detect potential corruption
 
     public static int ConsecutiveZerosMaximum { get; set; } = 3;
+*/
 
     /// <summary>
     ///     Gets or sets the seed for random number generation.
@@ -32,8 +34,9 @@ public class ThreadSafeRandomNetCore : Random
     }
 
 
-    public static Random LocalRandom => _tRandom ?? Create();
+    private static Random LocalRandom => _tRandom ?? Create();
 
+    public new static Random Shared { get; } = new ThreadSafeRandomNetCore();
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static Random Create()
@@ -46,10 +49,11 @@ public class ThreadSafeRandomNetCore : Random
     {
         var result = LocalRandom.Next();
         AssertInRange(result, 0, int.MaxValue);
-        CheckForCorruption(result);
+        // CheckForCorruption(result);
         return result;
     }
 
+    /*
     private void CheckForCorruption(long result)
     {
         // Check for consecutive zeros which may indicate corruption
@@ -65,13 +69,15 @@ public class ThreadSafeRandomNetCore : Random
             Seed = Environment.TickCount;
     }
 
+*/
+
     public override int Next(int maxValue)
     {
         ArgumentOutOfRangeException.ThrowIfNegative(maxValue);
 
         var result = LocalRandom.Next(maxValue);
         AssertInRange(result, 0, maxValue);
-        CheckForCorruption(result);
+        // CheckForCorruption(result);
         return result;
     }
 
@@ -87,7 +93,7 @@ public class ThreadSafeRandomNetCore : Random
 
         var result = LocalRandom.Next(minValue, maxValue);
         AssertInRange(result, minValue, maxValue);
-        CheckForCorruption(result);
+        // CheckForCorruption(result);
         return result;
     }
 
@@ -95,7 +101,7 @@ public class ThreadSafeRandomNetCore : Random
     {
         var result = LocalRandom.NextInt64();
         AssertInRange(result, 0, long.MaxValue);
-        CheckForCorruption(result);
+        // CheckForCorruption(result);
         return result;
     }
 
@@ -105,7 +111,7 @@ public class ThreadSafeRandomNetCore : Random
 
         var result = LocalRandom.NextInt64(maxValue);
         AssertInRange(result, 0, maxValue);
-        CheckForCorruption(result);
+        // CheckForCorruption(result);
         return result;
     }
 
@@ -115,7 +121,7 @@ public class ThreadSafeRandomNetCore : Random
 
         var result = LocalRandom.NextInt64(minValue, maxValue);
         AssertInRange(result, minValue, maxValue);
-        CheckForCorruption(result);
+        // CheckForCorruption(result);
         return result;
     }
 

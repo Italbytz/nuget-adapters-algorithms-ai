@@ -11,7 +11,7 @@ public class ThreadSafeRandomNetCoreTests
     public void TestThreadSafeRandomFixedSeed()
     {
         ThreadSafeRandomNetCore.Seed = 42;
-        var random = ThreadSafeRandomNetCore.LocalRandom;
+        var random = ThreadSafeRandomNetCore.Shared;
 
         // Generate an array of 10 random numbers
         var numbers = new int[10];
@@ -26,7 +26,7 @@ public class ThreadSafeRandomNetCoreTests
     public void TestThreadSafeRandomDefaultSeed()
     {
         ThreadSafeRandomNetCore.Seed = null;
-        var random = ThreadSafeRandomNetCore.LocalRandom;
+        var random = ThreadSafeRandomNetCore.Shared;
 
         // Generate an array of 10 random numbers
         var numbers = new int[10];
@@ -47,7 +47,7 @@ public class ThreadSafeRandomNetCoreTests
         for (var t = 0; t < 5; t++)
             tasks.Add(Task.Run(() =>
             {
-                var random = ThreadSafeRandomNetCore.LocalRandom;
+                var random = ThreadSafeRandomNetCore.Shared;
                 var numbers = new int[10];
                 for (var i = 0; i < 10; i++) numbers[i] = random.Next(1, 100);
                 lock (results)
@@ -74,7 +74,7 @@ public class ThreadSafeRandomNetCoreTests
         for (var t = 0; t < 5; t++)
             tasks.Add(Task.Run(() =>
             {
-                var random = ThreadSafeRandomNetCore.LocalRandom;
+                var random = ThreadSafeRandomNetCore.Shared;
                 var numbers = new int[10];
                 for (var i = 0; i < 10; i++) numbers[i] = random.Next(1, 100);
                 lock (results)
@@ -92,10 +92,30 @@ public class ThreadSafeRandomNetCoreTests
     }
 
     [Test]
+    public void TestBruteForceCorruption()
+    {
+        ThreadSafeRandomNetCore.Seed = 42;
+        var rng =
+            ThreadSafeRandomNetCore.Shared; // create a shared Random instance
+        for (var i = 0; i < 10; i++)
+            Parallel.For(0, 5, x => // run in parallel
+            {
+                var numbers = new int[100000];
+                for (var i = 0; i < numbers.Length; ++i)
+                    numbers[i] =
+                        rng.Next(); // Fetch 10,000 random numbers, to trigger the thread-safety issues
+
+                var numZeros =
+                    numbers.Count(x => x == 0); // how many issues were there?
+                Assert.That(numZeros, Is.EqualTo(0));
+            });
+    }
+
+    [Test]
     public void TestNoRepeatingSequence()
     {
         ThreadSafeRandomNetCore.Seed = 42;
-        var random = ThreadSafeRandomNetCore.LocalRandom;
+        var random = ThreadSafeRandomNetCore.Shared;
 
         // Generate a large sequence of random numbers
         var numbers = new int[10000];
