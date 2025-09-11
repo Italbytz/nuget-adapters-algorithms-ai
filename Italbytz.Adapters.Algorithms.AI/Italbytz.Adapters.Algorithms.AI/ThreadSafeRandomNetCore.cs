@@ -12,6 +12,11 @@ public class ThreadSafeRandomNetCore : Random
     private static int? _seed;
     [ThreadStatic] private static Random? _tRandom;
 
+    private long
+        _consecutiveZeros; // Track consecutive zeros to detect potential corruption
+
+    public static int ConsecutiveZerosMaximum { get; set; } = 3;
+
     /// <summary>
     ///     Gets or sets the seed for random number generation.
     /// </summary>
@@ -41,7 +46,23 @@ public class ThreadSafeRandomNetCore : Random
     {
         var result = LocalRandom.Next();
         AssertInRange(result, 0, int.MaxValue);
+        CheckForCorruption(result);
         return result;
+    }
+
+    private void CheckForCorruption(long result)
+    {
+        // Check for consecutive zeros which may indicate corruption
+        if (result == 0)
+            _consecutiveZeros++;
+        else
+            _consecutiveZeros = 0;
+        if (_consecutiveZeros < ConsecutiveZerosMaximum) return;
+        // Increment the seed to avoid repeated zeros
+        if (_seed.HasValue)
+            Seed = _seed.Value + 1;
+        else
+            Seed = Environment.TickCount;
     }
 
     public override int Next(int maxValue)
@@ -50,12 +71,14 @@ public class ThreadSafeRandomNetCore : Random
 
         var result = LocalRandom.Next(maxValue);
         AssertInRange(result, 0, maxValue);
+        CheckForCorruption(result);
         return result;
     }
 
     private static void ThrowMinMaxValueSwapped()
     {
-        throw new ArgumentOutOfRangeException("minValue");
+        throw new ArgumentOutOfRangeException("minValue",
+            "minValue must be less than or equal to maxValue");
     }
 
     public override int Next(int minValue, int maxValue)
@@ -64,6 +87,7 @@ public class ThreadSafeRandomNetCore : Random
 
         var result = LocalRandom.Next(minValue, maxValue);
         AssertInRange(result, minValue, maxValue);
+        CheckForCorruption(result);
         return result;
     }
 
@@ -71,6 +95,7 @@ public class ThreadSafeRandomNetCore : Random
     {
         var result = LocalRandom.NextInt64();
         AssertInRange(result, 0, long.MaxValue);
+        CheckForCorruption(result);
         return result;
     }
 
@@ -80,6 +105,7 @@ public class ThreadSafeRandomNetCore : Random
 
         var result = LocalRandom.NextInt64(maxValue);
         AssertInRange(result, 0, maxValue);
+        CheckForCorruption(result);
         return result;
     }
 
@@ -89,6 +115,7 @@ public class ThreadSafeRandomNetCore : Random
 
         var result = LocalRandom.NextInt64(minValue, maxValue);
         AssertInRange(result, minValue, maxValue);
+        CheckForCorruption(result);
         return result;
     }
 
@@ -121,7 +148,7 @@ public class ThreadSafeRandomNetCore : Random
 
     protected override double Sample()
     {
-        throw new NotSupportedException();
+        return LocalRandom.NextDouble();
     }
 
     private static void AssertInRange(long result, long minInclusive,
